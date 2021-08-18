@@ -1,24 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from "react-router-dom";
+
+import WorkPage from './pages/Works';
+import ContactPage from './pages/Contact';
+import HomePage from './pages/Home';
+
+import './App.scss';
+import { ThemeProvider } from 'styled-components';
+import theme from './theme/theme.js';
+
+import Offer from './components/Offer/Offer';
+import Works from './components/Works/Works';
+import Bottom from './components/Bottom/Bottom';
+import Footer from './components/Bottom/Footer';
+import Skills from './components/Bottom/Skills';
+import Header from './components/Header/Header';
+import Container from './components/Container';
+import Navbar from './components/Navbar/Navbar';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    <Router>
+      <ThemeProvider theme={theme}>
+        <Container>
+          <Navbar />
+        </Container>
+        <Switch>
+            <Route exact path="/" component={HomePage} />
+            <Route path="/works" component={WorkPage} />
+            <Route path="/contact" component={ContactPage} />
+        </Switch>
+      </ThemeProvider>
+    </Router>
+    </>
   );
 }
 
