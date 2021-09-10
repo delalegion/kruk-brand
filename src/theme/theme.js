@@ -1,7 +1,6 @@
 const theme = {
     primary: '#E61E29',
     grey: '#757575',
-    black: '#000000',
     animation: 'all 0.2s ease-in-out',
     animationSecond: 'all 0.4s cubic-bezier(.25,.74,.22,.99)',
     thin: "'Silka-Thin', sans-serif",

@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import ImageFirst from "../../assets/first.png";
-import ImageSecond from "../../assets/second.png";
-import ImageThird from "../../assets/third.png";
+import ImageFirst from "../../assets/what_2.svg";
+import ImageSecond from "../../assets/what_1.svg";
+import ImageThird from "../../assets/what_3.svg";
 
 const Title = styled.h1`
     font-size: 6.250vw;
@@ -11,7 +11,7 @@ const Title = styled.h1`
         font-size: 120px;
     }
     @media (max-width: 768px) {
-        font-size: 15vw;
+        font-size: 13vw;
         margin-top: 0px;
     }
 `
@@ -83,8 +83,8 @@ const GridItemText = styled.p`
 
 `
 const GridItemBox = styled.div`
-    padding: 10px;
-    background-color: #E3E3E3;
+    padding: 30px 10px;
+    background-color: #272727;
     justify-content: center;
     display: flex;
     /* height: 380px; */
@@ -121,7 +121,7 @@ const Offer = () => {
                             <img src={ImageThird} alt="" />
                         </GridItemBox>
                         <GridItemText>
-                        I’m doing modern websites
+                        I'm doing modern websites
                         </GridItemText>
                     </GridItem>
                     <GridItem>
@@ -129,7 +129,7 @@ const Offer = () => {
                             <img src={ImageFirst} alt="" />
                         </GridItemBox>
                         <GridItemText>
-                        I'm making a new image for brands
+                        I'm making new image for brands
                         </GridItemText>
                     </GridItem>
                     <GridItem>
@@ -137,7 +137,7 @@ const Offer = () => {
                             <img src={ImageSecond} alt="" />
                         </GridItemBox>
                         <GridItemText>
-                        I'm doing graphic things
+                        I'm designing things to web and print
                         </GridItemText>
                     </GridItem>
                 </GridStyled>

@@ -10,9 +10,10 @@ const Title = styled.h1`
 
     @media (min-width: 1920px) {
         font-size: 120px;
+        margin: 60px 0;
     }
     @media (max-width: 768px) {
-        font-size: 15vw;
+        font-size: 13vw;
         margin-top: 10px;
         margin-bottom: 30px;
     }
@@ -44,7 +45,7 @@ const Skills = () => {
     return(
         <>
             <SkillsStyled>
-                <Title>Work areas</Title>
+                <Title>Works area</Title>
                 <SkillsItems>
                     <p>Product design</p>
                     <p>Ui design</p>
@@ -52,7 +53,7 @@ const Skills = () => {
                     <p>Graphic design</p>
                     <p>Branding</p>
                     <p>3D</p>
-                    <p>Illustrations</p>
+                    <p>Illustracje</p>
                     <p>HTML</p>
                     <p>CSS</p>
                     <p>SASS</p>

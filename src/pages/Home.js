@@ -1,11 +1,10 @@
-import Offer from '../components/Offer/Offer';
-import Works from '../components/Works/Works';
+import Offer from '../components/Home/Offer';
+import Works from '../components/Home/Works';
 import Bottom from '../components/Bottom/Bottom';
 import Footer from '../components/Bottom/Footer';
 import Skills from '../components/Bottom/Skills';
-import Header from '../components/Header/Header';
+import Header from '../components/Home/Header';
 import Container from '../components/Container';
-import Navbar from '../components/Navbar/Navbar';
 
 const Home = () => {
     return(

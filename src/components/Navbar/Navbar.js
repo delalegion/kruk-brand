@@ -18,6 +18,7 @@ const MenuStyled = styled.ul`
     display: flex;
     flex-direction: row;
     margin: 0;
+    transform: all 0.2s linear;
 
     @media (max-width: 900px) {
         display: none;
@@ -25,20 +26,16 @@ const MenuStyled = styled.ul`
     }
 
     & > li {
-        list-style-type: none;
-        padding: 15px;
-        font-size: 1.094vw;
-        color: #000;
         display: flex;
-        align-items: center;
 
         a {
-            color: black;
+            color: white;
             text-decoration: none;
-        }
-
-        @media (min-width: 1920px) {
-            font-size: 21px;
+            list-style-type: none;
+            padding: 2rem;
+            font-size: 23px;
+            align-items: center;
+            transition: all 0.2s ease;
         }
     }
 `
@@ -110,16 +107,6 @@ const MenuMobileStyled = styled.div`
         visibility: visible;
     }
 `
-const MenuClose = styled.section`
-    display: flex;
-    width: 100%;
-    justify-content: flex-end;
-
-    svg {
-        margin-right: 35px;
-        margin-top: 30px;
-    }
-`
 
 const Navbar = (props) => {
 
@@ -129,15 +116,15 @@ const Navbar = (props) => {
         <NavbarStyled>
             <LogoStyled src={Logo} alt="My personal logo which present head of raven on red background and title Hubert Kruk" />
             <MenuStyled>
-                <li><Link to="/" className="link">Works</Link></li>
-                <li><Link to="/works" className="link">Services</Link></li>
-                <li><Link to="/contact" className="link">Contact</Link></li>
+                <li><Link to="/" className="link hover-this">Home</Link></li>
+                <li><Link to="/works" className="link hover-this">Works</Link></li>
+                {/* <li><Link to="/works" className="link hover-this">Services</Link></li> */}
+                <li><Link to="/contact" className="link hover-this">Contact</Link></li>
             </MenuStyled>
             <MenuButtonStyled onClick={() => setMenu(!menu)} className={menu ? 'open' : ''}>
                 <svg width="70" height="70" viewBox="0 0 49 49" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="49" height="49" fill="white"/>
-                    <path d="M29.1875 8.875L29.1875 34.9165" stroke="black" stroke-width="1.5" stroke-linecap="round" className="path_menu_1" />
-                    <path d="M19.8125 13.042L19.8125 40.1252" stroke="black" stroke-width="1.5" stroke-linecap="round" className="path_menu_2" />
+                    <path d="M29.1875 8.875L29.1875 34.9165" stroke="white" stroke-width="1.5" stroke-linecap="round" className="path_menu_1" />
+                    <path d="M19.8125 13.042L19.8125 40.1252" stroke="white" stroke-width="1.5" stroke-linecap="round" className="path_menu_2" />
                 </svg>
             </MenuButtonStyled>
             <MenuMobileStyled className={menu ? 'open' : ''}>

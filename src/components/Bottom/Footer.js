@@ -14,7 +14,7 @@ const Title = styled.h2`
     font-size: 3.125vw;
     font-family: ${props => props.theme.semiBold};
 
-    @media (min-width: 1920px) {
+    @media (min-width: 1650px) {
         font-size: 60px;
     }
     @media (max-width: 768px) {
@@ -34,7 +34,7 @@ const SocialTitle = styled.h3`
     @media (max-width: 768px) {
         font-size: 6vw;
         margin-top: 10px;
-        margin-bottom: 30px;
+        margin-bottom: 15px;
     }
 `
 const SocialItems = styled.div`
@@ -42,7 +42,19 @@ const SocialItems = styled.div`
     flex-wrap: wrap;
     width: 100%;
 
-    & > p {
+    @media (min-width: 1024px) {
+        & > p {
+            margin: 1.5vw 0;
+        }
+    }
+    @media (max-width: 1024px) {
+        & > p {
+            margin: 0;
+            margin-bottom: 2vw;
+        }
+    }
+
+    & > p > a {
         font-size: 1.563vw;
         margin-right: 50px;
         color: #b2b2b2;
@@ -53,10 +65,14 @@ const SocialItems = styled.div`
         @media (max-width: 768px) {
             font-size: 4vw;
         }
+
+        &:hover {
+            color: white;
+        }
     }
 `
 const CopyStyled = styled.p`
-    padding: 70px 0 30px 0;
+    padding: 70px 0 0px 0;
     color: ${props => props.theme.primary};
     font-size: 1.094vw;
 
@@ -97,16 +113,16 @@ const Footer = () => {
             <FooterStyled>
                 <div className="row">
                     <div className="col_12 col_m_8">
-                        <Title>Any questions? Feel free to<br /> ask any question! 🤩</Title>
+                        <Title>Any questions?<br/> Feel free to ask! 🤩</Title>
                     </div>
                     <div className="col_12 col_m_4">
                         <SocialTitle>Social media</SocialTitle>
                         <SocialItems>
-                            <p>Dribbble</p>
-                            <p>Behance</p>
-                            <p>Linkedin</p>
-                            <p>Github</p>
-                            <p>Messenger</p>
+                            <p><a className="hover-this" href=""><span>Dribbble</span></a></p>
+                            <p><a className="hover-this" href=""><span>Behance</span></a></p>
+                            <p><a className="hover-this" href=""><span>Linkedin</span></a></p>
+                            <p><a className="hover-this" href=""><span>Github</span></a></p>
+                            <p><a className="hover-this" href=""><span>Messenger</span></a></p>
                         </SocialItems>
                         <EmailTitle>Email</EmailTitle>
                         <Email>hkrukcontact@gmail.com</Email>
