@@ -16,27 +16,6 @@ import Container from './components/Container';
 import Navbar from './components/Navbar/Navbar';
 
 function App() {
-   
-  // useEffect(() => {
-  //   const links = document.querySelectorAll(".hover-this");
-
-  //   const animateIt = function (e) {
-  //       const a = this.querySelector("span");
-  //       const { offsetX: x, offsetY: y } = e,
-  //       { offsetWidth: width, offsetHeight: height } = this,
-
-  //       move = 20,
-  //       xMove = x / width * (move * 2) - move,
-  //       yMove = y / height * (move * 2) - move;
-
-  //       a.style.transform = `translate(${xMove}px, ${yMove}px)`;
-
-  //       if (e.type === "mouseleave") a.style.transform = `translate(0px, 0px)`;
-  //   }
-
-  //   links.forEach(b => b.addEventListener('mousemove', animateIt));
-  //   links.forEach(b => b.addEventListener('mouseleave', animateIt));
-  // }, [])
 
   return (
     <>

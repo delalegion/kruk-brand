@@ -1,10 +1,6 @@
-import { useEffect, useRef } from 'react';
-
 import styled from "styled-components";
 import background from "../../assets/background_footer.png";
 import circles from "../../assets/background_footer_circles.png";
-
-import KUTE from "kute.js";
 
 const BottomStyled = styled.section`
     padding: 50px 0;
@@ -60,7 +56,6 @@ const Bottom = (props) => {
                 {props.children}
 
                 <Background src={circles} alt="" />
-   
             </BottomStyled>
         </>
     )

@@ -86,7 +86,6 @@ const MenuMobileStyled = styled.div`
     z-index: 100;
     display: none;
     visibility: hidden;
-    display: flex;
     flex-direction: column;
     z-index: 100;
 
@@ -96,15 +95,26 @@ const MenuMobileStyled = styled.div`
 
         li {
             list-style-type: none;
-            color: white;
-            font-size: 13vw;
             padding: 15px 10px;
+
+            a {
+                display: none;
+                visibility: hidden;
+                color: white;
+                font-size: 13vw;
+                text-decoration: none;
+            }
         }
     }
 
     &.open {
         display: flex;
         visibility: visible;
+
+        a {
+            display: flex;
+            visibility: visible;
+        }
     }
 `
 
@@ -114,24 +124,23 @@ const Navbar = (props) => {
 
     return(
         <NavbarStyled>
-            <LogoStyled src={Logo} alt="My personal logo which present head of raven on red background and title Hubert Kruk" />
+            <Link to="/" className="link hover-this"><LogoStyled src={Logo} alt="My personal logo which present head of raven on red background and title Hubert Kruk" /></Link>
             <MenuStyled>
                 <li><Link to="/" className="link hover-this">Home</Link></li>
                 <li><Link to="/works" className="link hover-this">Works</Link></li>
-                {/* <li><Link to="/works" className="link hover-this">Services</Link></li> */}
                 <li><Link to="/contact" className="link hover-this">Contact</Link></li>
             </MenuStyled>
             <MenuButtonStyled onClick={() => setMenu(!menu)} className={menu ? 'open' : ''}>
                 <svg width="70" height="70" viewBox="0 0 49 49" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M29.1875 8.875L29.1875 34.9165" stroke="white" stroke-width="1.5" stroke-linecap="round" className="path_menu_1" />
-                    <path d="M19.8125 13.042L19.8125 40.1252" stroke="white" stroke-width="1.5" stroke-linecap="round" className="path_menu_2" />
+                    <path d="M29.1875 8.875L29.1875 34.9165" stroke="white" strokeWidth="1.5" strokeLinecap="round" className="path_menu_1" />
+                    <path d="M19.8125 13.042L19.8125 40.1252" stroke="white" strokeWidth="1.5" strokeLinecap="round" className="path_menu_2" />
                 </svg>
             </MenuButtonStyled>
             <MenuMobileStyled className={menu ? 'open' : ''}>
                 <ul>
-                    <li>Works</li>
-                    <li>Services</li>
-                    <li>Contact</li>
+                    <li><Link to="/" className="link hover-this" onClick={() => setMenu(false)}>Home</Link></li>
+                    <li><Link to="/works" className="link hover-this" onClick={() => setMenu(false)}>Works</Link></li>
+                    <li><Link to="/contact" className="link hover-this" onClick={() => setMenu(false)}>Contact</Link></li>
                 </ul>
             </MenuMobileStyled>
         </NavbarStyled>

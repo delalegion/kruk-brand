@@ -95,9 +95,10 @@ const EmailTitle = styled.h4`
         font-size: 6vw;
     }
 `
-const Email = styled.p`
+const Email = styled.a`
     font-size: 1.563vw;
     color: #b2b2b2;
+    text-decoration: none;
 
     @media (min-width: 1920px) {
         font-size: 30px;
@@ -107,27 +108,29 @@ const Email = styled.p`
     }
 `
 
-const Footer = () => {
+const Footer = ({ social }) => {
     return(
         <>
             <FooterStyled>
-                <div className="row">
-                    <div className="col_12 col_m_8">
-                        <Title>Any questions?<br/> Feel free to ask! 🤩</Title>
+                {!social ? (
+                    <div className="row">
+                        <div className="col_12 col_m_8">
+                            <Title>Any questions?<br/> Feel free to ask! 🤩</Title>
+                        </div>
+                        <div className="col_12 col_m_4">
+                            <SocialTitle>Social media</SocialTitle>
+                            <SocialItems>
+                                <p><a className="hover-this" href="https://www.dribbble.com/hubkruczek"><span>Dribbble</span></a></p>
+                                <p><a className="hover-this" href="https://www.behance.com/hubkruczek"><span>Behance</span></a></p>
+                                <p><a className="hover-this" href="https://www.linkedin.com/in/hubert-kruk/"><span>Linkedin</span></a></p>
+                                <p><a className="hover-this" href="https://www.github.com/delalegion"><span>Github</span></a></p>
+                                <p><a className="hover-this" href="https://www.m.me/krukhubert"><span>Messenger</span></a></p>
+                            </SocialItems>
+                            <EmailTitle>Email</EmailTitle>
+                            <Email href="mailto:hkrukcontact@gmail.com">hkrukcontact@gmail.com</Email>
+                        </div>
                     </div>
-                    <div className="col_12 col_m_4">
-                        <SocialTitle>Social media</SocialTitle>
-                        <SocialItems>
-                            <p><a className="hover-this" href=""><span>Dribbble</span></a></p>
-                            <p><a className="hover-this" href=""><span>Behance</span></a></p>
-                            <p><a className="hover-this" href=""><span>Linkedin</span></a></p>
-                            <p><a className="hover-this" href=""><span>Github</span></a></p>
-                            <p><a className="hover-this" href=""><span>Messenger</span></a></p>
-                        </SocialItems>
-                        <EmailTitle>Email</EmailTitle>
-                        <Email>hkrukcontact@gmail.com</Email>
-                    </div>
-                </div>
+                ) : ''}
                 <CopyStyled>
                     Hubert Kruk @ 2020
                 </CopyStyled>

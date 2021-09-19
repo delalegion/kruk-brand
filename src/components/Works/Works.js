@@ -6,12 +6,18 @@ import Project3 from "../../assets/projects/3.png";
 import Project4 from "../../assets/projects/4.png";
 import Project5 from "../../assets/projects/5.png";
 import Project6 from "../../assets/projects/6.png";
-import Arrow from "../../assets/arrow_2.svg";
 
 import Container from "components/Container";
+import Coding from "./WorksCoding";
 
 const WorksStyled = styled.section`
-    margin: 11.806vw 6.25vw;
+    margin: 11.806vw 6.25vw 3.806vw 6.25vw;
+    scroll-behavior: smooth;
+
+    @media (max-width: 768px) {
+        margin: 0;
+        margin-top: 50px;
+    }
 `
 const Grid = styled.div`
     display: grid;
@@ -20,22 +26,29 @@ const Grid = styled.div`
     grid-column-gap: 0.694vw;
     grid-template-columns: repeat(12, 1fr);
     margin-bottom: 50px;
+
+    @media (max-width: 769px) {
+        grid-template-columns: repeat(1, 1fr);
+        grid-column-gap: 2vw;
+        margin: 0;
+    }
 `
-const GridNormal = styled.div`
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 3.646vw;
-    grid-auto-rows: 1fr;
-    margin-top: 150px;
+const ItemText = styled.h2`
+    font-size: 1.146vw;
+    font-family: ${props => props.theme.semiBold};
+    margin-top: 15px;
+    margin-bottom: 15px;
 
     @media (min-width: 1920px) {
-        font-size: 70px;
+        font-size: 22px;
     }
     @media (max-width: 768px) {
-        grid-template-columns: repeat(2, 1fr);
+        font-size: 3.146vw;
+        margin-top: 8px;
     }
     @media (max-width: 500px) {
-        grid-template-columns: repeat(1, 1fr);
+        font-size: 3.546vw;  
+        margin-bottom: 5px;
     }
 `
 const ItemPicture = styled.picture`
@@ -55,11 +68,23 @@ const ItemPicture = styled.picture`
         bottom: auto;
         transition: ${props => props.theme.animationSecond};
     }
+    & > img:nth-child(1) {
+        z-index: 2;
+        position: relative;
+    }
+    & > img:nth-child(2) {
+        position: absolute;
+        left: 0;
+        z-index: 1;
+    }
 `
 const Project = styled.article`
     display: flex;
     flex-direction: column;
 
+    @media (max-width: 768px) {
+        margin-bottom: 4.883vw;
+    }
     &:hover {
         cursor: pointer;
     }
@@ -67,49 +92,90 @@ const Project = styled.article`
         & > img {
             transform: scale(1.1);
         }
+        & > img:nth-child(1) {
+            opacity: 0;
+        }
+    }
+`
+const GridNormal = styled.div`
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 3.646vw;
+    grid-auto-rows: 1fr;
+    margin-top: 150px;
+
+    @media (max-width: 768px) {
+        ${ItemText} {
+            font-size: 3vw;
+        }
+    }
+
+    & > ${Project} {
+        &:nth-child(2),
+        &:nth-child(5) {
+            transform: translateY(120px);
+        }
+    }
+
+    @media (min-width: 1920px) {
+        font-size: 70px;
+    }
+    @media (max-width: 769px) {
+        grid-template-columns: repeat(2, 1fr);
+        margin-top: 0;
+        grid-gap: 0;
+        grid-column-gap: 2vw;
     }
 `
 const GridA = styled.div`
     position: relative;
 
-    & > ${Grid} > ${Project}:nth-child(1) {
-        grid-column: 2/7;
-    }
-    & > ${Grid} > ${Project}:nth-child(2) {
-        grid-column: 8/12;
+    @media (min-width: 769px) {
+        & > ${Grid} > ${Project}:nth-child(1) {
+            grid-column: 2/7;
+        }
+        & > ${Grid} > ${Project}:nth-child(2) {
+            grid-column: 8/12;
+        }
     }
 `
 const GridB = styled.div`
     position: relative;
 
-    & > ${Grid} > ${Project}:nth-child(1) {
+    @media (min-width: 769px) {
+        & > ${Grid} > ${Project}:nth-child(1) {
         grid-column: 1/6;
-    }
-    & > ${Grid} > ${Project}:nth-child(2) {
-        grid-column: 7/11;
-        margin-top: 50px;
+        }
+        & > ${Grid} > ${Project}:nth-child(2) {
+            grid-column: 7/11;
+            margin-top: 50px;
+        }
     }
 `
 const GridC = styled.div`
     position: relative;
 
-    & > ${Grid} > ${Project}:nth-child(1) {
+    @media (min-width: 769px) {
+        & > ${Grid} > ${Project}:nth-child(1) {
         grid-column: 3/7;
         margin-top: 30px;
-    }
-    & > ${Grid} > ${Project}:nth-child(2) {
-        grid-column: 10/13;
+        }
+        & > ${Grid} > ${Project}:nth-child(2) {
+            grid-column: 10/13;
+        }
     }
 `
 const GridD = styled.div`
     position: relative;
 
-    & > ${Grid} > ${Project}:nth-child(1) {
+    @media (min-width: 769px) {
+        & > ${Grid} > ${Project}:nth-child(1) {
         grid-column: 1/5;
         margin-top: 50px;
-    }
-    & > ${Grid} > ${Project}:nth-child(2) {
-        grid-column: 7/12;
+        }
+        & > ${Grid} > ${Project}:nth-child(2) {
+            grid-column: 7/12;
+        }
     }
 `
 const ItemFigure = styled.figure`
@@ -119,23 +185,6 @@ const ItemFigure = styled.figure`
     padding-top: 70.33333%;
     margin: 0;
     overflow: hidden;
-`
-const ItemText = styled.h2`
-    font-size: 1.146vw;
-    font-family: ${props => props.theme.semiBold};
-    margin-top: 15px;
-    margin-bottom: 15px;
-
-    @media (min-width: 1920px) {
-        font-size: 22px;
-    }
-    @media (max-width: 768px) {
-        font-size: 3.146vw;
-    }
-    @media (max-width: 500px) {
-        font-size: 4.546vw;  
-        margin-bottom: 10px;
-    }
 `
 const ItemClient = styled.p`
     font-size: 0.990vw;
@@ -150,84 +199,15 @@ const ItemClient = styled.p`
         font-size: 2.990vw;
     }
     @media (max-width: 500px) {
-        font-size: 3.990vw;
+        font-size: 2.990vw;
     }
-`
-const Title = styled.h1`
-    font-size: 6.250vw;
-    font-family: ${props => props.theme.semiBold};
-
-    @media (min-width: 1920px) {
-        font-size: 120px;
-    }
-    @media (max-width: 768px) {
-        font-size: 13vw;
-        margin-top: 0px;
-    }
-`
-const CodingStyled = styled.section`
-    margin-top: 100px;
-    padding: 50px 0;
-`
-const CodingItem = styled.div`
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding-top: 40px;
-    padding-bottom: 40px;
-    border-bottom: 2px solid #202020;
-    color: ${props => props.theme.grey};
-    transition: ${props => props.theme.animation};
-
-    &:hover {
-        padding-bottom: 38px;
-        border-bottom: 4px solid ${props => props.theme.primary};
-    }
-`
-const CodingButton = styled.a`
-    display: flex;
-    flex-direction: row;
-    font-size: 25px;
-    align-items: center;
-    letter-spacing: 1.5px;
-    transition: ${props => props.theme.animation};
-    color: ${props => props.theme.grey};
-    text-decoration: none;
-
-    &:hover {
-        color: white;
-        cursor: pointer;
-        & > svg {
-            & > path { transition: ${props => props.theme.animation}; }
-            & > path:nth-child(1) {
-                fill: white;
-            }
-            & > path:nth-child(2) {
-                stroke: white;
-            }
-        }
-    }
-    & > svg {
-        transition: ${props => props.theme.animation};
-        margin-left: 10px;
-        & > path { transition: ${props => props.theme.animation}; }
-    }
-    &:nth-child(2) {
-        margin-left: 40px;
-    }
-`
-const CodingButtons = styled.div`
-    display: flex;
-    flex-direction: row;
-`
-const Github = styled.div`
-    margin-bottom: 50px;
 `
 
 const Works = () => {
+
     return(
         <>
-            <WorksStyled id="works">
+            <WorksStyled id="works" name="works">
                 <Container>
                 <GridA>
                     <Grid>
@@ -235,6 +215,7 @@ const Works = () => {
                             <ItemFigure>
                                 <ItemPicture>
                                     <img src={Project1} alt="" />
+                                    <img src={Project4} alt="" />
                                 </ItemPicture>
                             </ItemFigure>
                             <ItemText>
@@ -444,42 +425,8 @@ const Works = () => {
                     </Project>
                 </GridNormal>
 
-                <CodingStyled>
-                    <Title>Coding</Title>
-                    <div className="row">
-                        <div className="col_l_8 col_l_4_offset">
-                            <Github>
-                                <CodingButton href="https://www.github.com/delalegion">Github profile <svg width="37" height="37" viewBox="0 0 37 37" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.24793 26.8651L6.18727 27.9258L8.30859 30.0471L9.36925 28.9864L7.24793 26.8651ZM9.36925 28.9864L25.9863 12.3694L23.8649 10.2481L7.24793 26.8651L9.36925 28.9864Z" fill="#757575"/><path d="M8.30859 11.3086H24.9256V27.9256" stroke="#757575" stroke-width="3" stroke-linecap="square"/></svg></CodingButton>
-                            </Github>
-                            <CodingItem>
-                                Personal website code
-                                <CodingButtons>
-                                    <CodingButton href="#">CODE <svg width="37" height="37" viewBox="0 0 37 37" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.24793 26.8651L6.18727 27.9258L8.30859 30.0471L9.36925 28.9864L7.24793 26.8651ZM9.36925 28.9864L25.9863 12.3694L23.8649 10.2481L7.24793 26.8651L9.36925 28.9864Z" fill="#757575"/><path d="M8.30859 11.3086H24.9256V27.9256" stroke="#757575" stroke-width="3" stroke-linecap="square"/></svg></CodingButton>
-                                    <CodingButton href="#">LIVE <svg width="37" height="37" viewBox="0 0 37 37" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.24793 26.8651L6.18727 27.9258L8.30859 30.0471L9.36925 28.9864L7.24793 26.8651ZM9.36925 28.9864L25.9863 12.3694L23.8649 10.2481L7.24793 26.8651L9.36925 28.9864Z" fill="#757575"/><path d="M8.30859 11.3086H24.9256V27.9256" stroke="#757575" stroke-width="3" stroke-linecap="square"/></svg></CodingButton>
-                                </CodingButtons>
-                            </CodingItem>
-                            <CodingItem>
-                                Logistics company website
-                                <CodingButtons>
-                                    <CodingButton href="#">CODE <svg width="37" height="37" viewBox="0 0 37 37" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.24793 26.8651L6.18727 27.9258L8.30859 30.0471L9.36925 28.9864L7.24793 26.8651ZM9.36925 28.9864L25.9863 12.3694L23.8649 10.2481L7.24793 26.8651L9.36925 28.9864Z" fill="#757575"/><path d="M8.30859 11.3086H24.9256V27.9256" stroke="#757575" stroke-width="3" stroke-linecap="square"/></svg></CodingButton>
-                                    <CodingButton href="#">LIVE <svg width="37" height="37" viewBox="0 0 37 37" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.24793 26.8651L6.18727 27.9258L8.30859 30.0471L9.36925 28.9864L7.24793 26.8651ZM9.36925 28.9864L25.9863 12.3694L23.8649 10.2481L7.24793 26.8651L9.36925 28.9864Z" fill="#757575"/><path d="M8.30859 11.3086H24.9256V27.9256" stroke="#757575" stroke-width="3" stroke-linecap="square"/></svg></CodingButton>
-                                </CodingButtons>
-                            </CodingItem>
-                            <CodingItem>
-                                Marketing company website
-                                <CodingButtons>
-                                    <CodingButton href="#">LIVE <svg width="37" height="37" viewBox="0 0 37 37" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.24793 26.8651L6.18727 27.9258L8.30859 30.0471L9.36925 28.9864L7.24793 26.8651ZM9.36925 28.9864L25.9863 12.3694L23.8649 10.2481L7.24793 26.8651L9.36925 28.9864Z" fill="#757575"/><path d="M8.30859 11.3086H24.9256V27.9256" stroke="#757575" stroke-width="3" stroke-linecap="square"/></svg></CodingButton>
-                                </CodingButtons>
-                            </CodingItem>
-                            <CodingItem>
-                                Old real estate company website
-                                <CodingButtons>
-                                    <CodingButton href="#">LIVE <svg width="37" height="37" viewBox="0 0 37 37" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.24793 26.8651L6.18727 27.9258L8.30859 30.0471L9.36925 28.9864L7.24793 26.8651ZM9.36925 28.9864L25.9863 12.3694L23.8649 10.2481L7.24793 26.8651L9.36925 28.9864Z" fill="#757575"/><path d="M8.30859 11.3086H24.9256V27.9256" stroke="#757575" stroke-width="3" stroke-linecap="square"/></svg></CodingButton>
-                                </CodingButtons>
-                            </CodingItem>
-                        </div>
-                    </div>
-                </CodingStyled>
+                <Coding />
+
                 </Container>
             </WorksStyled>
         </>

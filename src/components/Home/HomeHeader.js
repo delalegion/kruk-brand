@@ -133,6 +133,8 @@ const SocialStyled = styled.ul`
         & > a {
             display: flex;
             align-items: center;
+            color: white;
+            text-decoration: none;
 
             &:hover {
                 cursor: pointer;
@@ -175,18 +177,18 @@ const Header = () => {
                         & frontend dev
                     </ProfStyled>
                     <SocialStyled>
-                        <li><a>
+                        <li><a href="https://www.dribbble.com/hubkruczek">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
                             <path d="M15,7H3.41l5.3-5.29A1,1,0,0,0,7.29.29l-7,7a1,1,0,0,0-.21.33.92.92,0,0,0,0,.76,1,1,0,0,0,.21.33l7,7A1,1,0,0,0,8,16a1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.42L3.41,9H15a1,1,0,0,0,0-2Z"/>
                         </svg>
                             Dribbble</a></li>
-                        <li><a>
+                        <li><a href="https://www.behance.com/hubkruczek">
                         
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
                             <path d="M15,7H3.41l5.3-5.29A1,1,0,0,0,7.29.29l-7,7a1,1,0,0,0-.21.33.92.92,0,0,0,0,.76,1,1,0,0,0,.21.33l7,7A1,1,0,0,0,8,16a1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.42L3.41,9H15a1,1,0,0,0,0-2Z"/>
                         </svg>
                             Behance</a></li>
-                        <li><a>
+                        <li><a href="https://www.linkedin.com/in/hubert-kruk/">
                             
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
                             <path d="M15,7H3.41l5.3-5.29A1,1,0,0,0,7.29.29l-7,7a1,1,0,0,0-.21.33.92.92,0,0,0,0,.76,1,1,0,0,0,.21.33l7,7A1,1,0,0,0,8,16a1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.42L3.41,9H15a1,1,0,0,0,0-2Z"/>
@@ -197,7 +199,7 @@ const Header = () => {
                 <PhotoStyled>
                     <PhotoBox>
                         <img src={Photo} className="photo" alt="Photo of myself" />
-                        <img src={Line} className="line" alt="" />
+                        <img src={Line} className="line" alt="Decorate" />
                     </PhotoBox>
                 </PhotoStyled>
             </HeaderStyled>

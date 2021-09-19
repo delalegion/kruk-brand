@@ -104,17 +104,6 @@ const Offer = () => {
         <>
             <OfferStyled>
                 <Title>What i do</Title>
-                {/* <div className="row">
-                    <div className="col_4">
-                        <p>Hehe</p>
-                    </div>
-                    <div className="col_4">
-                        <p>Hehe</p>
-                    </div>
-                    <div className="col_4">
-                        <p>Hehe</p>
-                    </div>
-                </div> */}
                 <GridStyled>
                     <GridItem>
                         <GridItemBox>

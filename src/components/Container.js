@@ -5,7 +5,6 @@ const ContainerStyled = styled.div`
   margin: 0 auto;
   padding-left: 50px;
   padding-right: 50px;
-  overflow: hidden;
 
   @media (max-width: 768px) {
       padding-left: 20px;

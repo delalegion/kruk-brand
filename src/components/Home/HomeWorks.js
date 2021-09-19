@@ -323,7 +323,7 @@ const Works = () => {
                         </Roll>
                         <RollArrow viewBox="0 0 279 279" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M120.25 137.893H118.25V141.893H120.25V137.893ZM120.25 141.893H158.75V137.893H120.25V141.893Z" fill="#E61E29"/>
-                            <path d="M139.5 120.643L158.75 139.893L139.5 159.143" stroke="#E61E29" stroke-width="4" stroke-linecap="square"/>
+                            <path d="M139.5 120.643L158.75 139.893L139.5 159.143" stroke="#E61E29" strokeWidth="4" strokeLinecap="square"/>
                         </RollArrow>
                     </MoreButton>
                 </Button>
