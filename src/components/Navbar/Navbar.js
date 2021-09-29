@@ -1,7 +1,11 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react';
 import styled from "styled-components";
 import Logo from '../../assets/logo.svg';
 import { Link } from "react-router-dom";
+
+import useCursorHandlers from "hooks/useCursorHandlers";
+import useOnScreen from 'hooks/useOnScreen';
+import gsap from 'gsap/all';
 
 const NavbarStyled = styled.nav`
     padding-top: 40px;
@@ -13,7 +17,6 @@ const NavbarStyled = styled.nav`
         padding-top: 20px;
     }
 `
-
 const MenuStyled = styled.ul`
     display: flex;
     flex-direction: row;
@@ -118,17 +121,59 @@ const MenuMobileStyled = styled.div`
     }
 `
 
-const Navbar = (props) => {
+const Navbar = () => {
 
     const [menu, setMenu] = useState(false);
+    const [reveal, setReveal] = useState(false);
+    const [tl, setTimeline] = useState();
+
+    const logo = useRef(null);
+    const navbar = useRef(null);
+    const menuRef = useRef(null);
+
+    const cursorHandlers = useCursorHandlers();
+    const onScreen = useOnScreen(navbar);
+
+    useEffect(() => {
+        const timeline = gsap.timeline({ defaults: {ease: "power4.out"} });
+        setTimeline(timeline);
+        timeline.set(logo.current, { y: -60, opacity: 0 });
+
+        timeline.set(menuRef.current.children[0], { y: -60, opacity: 0 });
+        timeline.set(menuRef.current.children[1], { y: -60, opacity: 0 });
+        timeline.set(menuRef.current.children[2], { y: -60, opacity: 0 });
+    }, [])
+
+    useEffect(() => {
+        if (onScreen) setReveal(onScreen);
+    }, [onScreen]);
+
+    useEffect(() => {
+        if (reveal) {
+            tl.to(logo.current, {
+                duration: 1,
+                y: 0,
+                opacity: 1,
+                delay: 1,
+                ease: "power2"
+            }).to([menuRef.current.children[0], menuRef.current.children[1], menuRef.current.children[2]], {
+                duration: 1,
+                y: 0,
+                opacity: 1,
+                delay: -1,
+                stagger: 0.1,
+                ease: "power2"
+            });
+        }
+    }, [tl, reveal])
 
     return(
-        <NavbarStyled>
-            <Link to="/" className="link hover-this"><LogoStyled src={Logo} alt="My personal logo which present head of raven on red background and title Hubert Kruk" /></Link>
-            <MenuStyled>
-                <li><Link to="/" className="link hover-this">Home</Link></li>
-                <li><Link to="/works" className="link hover-this">Works</Link></li>
-                <li><Link to="/contact" className="link hover-this">Contact</Link></li>
+        <NavbarStyled name="navbar" ref={navbar}>
+            <Link to="/" className="link hover-this" {...cursorHandlers}><LogoStyled src={Logo} ref={logo} alt="My personal logo which present head of raven on red background and title Hubert Kruk" /></Link>
+            <MenuStyled ref={menuRef}>
+                <li><Link to="/" className="link hover-this" {...cursorHandlers}>Home</Link></li>
+                <li><Link to="/works" className="link hover-this" {...cursorHandlers}>Works</Link></li>
+                <li><Link to="/contact" className="link hover-this" {...cursorHandlers}>Contact</Link></li>
             </MenuStyled>
             <MenuButtonStyled onClick={() => setMenu(!menu)} className={menu ? 'open' : ''}>
                 <svg width="70" height="70" viewBox="0 0 49 49" fill="none" xmlns="http://www.w3.org/2000/svg">

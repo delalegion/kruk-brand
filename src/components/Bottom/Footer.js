@@ -1,5 +1,8 @@
 import styled from "styled-components";
 
+import useCursorHandlers from "hooks/useCursorHandlers";
+import PropTypes from 'prop-types';
+
 const FooterStyled = styled.footer`
     margin-top: 200px;
     color: white;
@@ -109,6 +112,9 @@ const Email = styled.a`
 `
 
 const Footer = ({ social }) => {
+
+    const cursorHandlers = useCursorHandlers();
+
     return(
         <>
             <FooterStyled>
@@ -120,19 +126,19 @@ const Footer = ({ social }) => {
                         <div className="col_12 col_m_4">
                             <SocialTitle>Social media</SocialTitle>
                             <SocialItems>
-                                <p><a className="hover-this" href="https://www.dribbble.com/hubkruczek"><span>Dribbble</span></a></p>
-                                <p><a className="hover-this" href="https://www.behance.com/hubkruczek"><span>Behance</span></a></p>
-                                <p><a className="hover-this" href="https://www.linkedin.com/in/hubert-kruk/"><span>Linkedin</span></a></p>
-                                <p><a className="hover-this" href="https://www.github.com/delalegion"><span>Github</span></a></p>
-                                <p><a className="hover-this" href="https://www.m.me/krukhubert"><span>Messenger</span></a></p>
+                                <p><a className="hover-this" href="https://www.dribbble.com/hubkruczek" {...cursorHandlers}><span>Dribbble</span></a></p>
+                                <p><a className="hover-this" href="https://www.behance.com/hubkruczek" {...cursorHandlers}><span>Behance</span></a></p>
+                                <p><a className="hover-this" href="https://www.linkedin.com/in/hubert-kruk/" {...cursorHandlers}><span>Linkedin</span></a></p>
+                                <p><a className="hover-this" href="https://www.github.com/delalegion" {...cursorHandlers}><span>Github</span></a></p>
+                                <p><a className="hover-this" href="https://www.m.me/krukhubert" {...cursorHandlers}><span>Messenger</span></a></p>
                             </SocialItems>
                             <EmailTitle>Email</EmailTitle>
-                            <Email href="mailto:hkrukcontact@gmail.com">hkrukcontact@gmail.com</Email>
+                            <Email href="mailto:hkrukcontact@gmail.com" {...cursorHandlers}>hkrukcontact@gmail.com</Email>
                         </div>
                     </div>
                 ) : ''}
                 <CopyStyled>
-                    Hubert Kruk @ 2020
+                    Hubert Kruk @ 2021
                 </CopyStyled>
             </FooterStyled>
         </>
@@ -140,3 +146,7 @@ const Footer = ({ social }) => {
 }
 
 export default Footer;
+
+Footer.propTypes = {
+    social: PropTypes.bool
+};

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const ContainerStyled = styled.div`
   max-width: 1620px;
@@ -23,3 +24,7 @@ const Container = (props) => {
 }
 
 export default Container;
+
+Container.propTypes = {
+    children: PropTypes.node
+};

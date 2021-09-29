@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import { Link } from 'react-scroll';
 import AnimatedTitle from 'components/AnimatedTitle/AnimatedTitle';
 
+import useCursorHandlers from "hooks/useCursorHandlers";
+
 const Scroll = styled.div`
     display: flex;
     position: relative;
@@ -38,7 +40,7 @@ const ScrollButtonBox = styled.div`
     justify-content: center;
     align-items: center;
     position: relative;
-    top: -9.375vw;
+    top: -8.375vw;
     margin-right: 50px;
 
     @media (min-width: 1920px) {
@@ -46,10 +48,15 @@ const ScrollButtonBox = styled.div`
         height: 180px;
     }
     @media (max-width: 1024px) {
+        width: 15.375vw;
+        height: 15.375vw;
+    }
+    @media (max-width: 768px) {
         width: 18.375vw;
         height: 18.375vw;
         top: 0;
     }
+
 `
 const ScrollButton = styled(Link)`
     display: flex;
@@ -101,11 +108,14 @@ const ScrollButton = styled(Link)`
 `
 
 const Header = () => {
+
+    const cursorHandlers = useCursorHandlers();
+
     return(
         <>
             <AnimatedTitle title="Check out my latest projects" />
             <Scroll>
-                    <ScrollButtonBox>
+                    <ScrollButtonBox {...cursorHandlers}>
                         <ScrollButton name="ScrollButton" to="works" smooth={true} duration={500} offset={-50}>
                             <svg width="30" height="44" viewBox="0 0 30 44" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M16.9 2L16.9 0.35L13.6 0.35L13.6 2L16.9 2ZM13.6 2L13.6 40.5L16.9 40.5L16.9 2L13.6 2Z" fill="white"/>

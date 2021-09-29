@@ -2,6 +2,12 @@ import styled from 'styled-components';
 import Photo from '../../assets/hubert.png';
 import Line from '../../assets/hubert_line_3.svg';
 
+import useCursorHandlers from "hooks/useCursorHandlers";
+import useOnScreen from 'hooks/useOnScreen';
+
+import { useEffect, useRef, useState } from 'react';
+import gsap from 'gsap/all';
+
 const HeaderStyled = styled.header`
     display: flex;
     flex-direction: row;
@@ -54,7 +60,6 @@ const PhotoStyled = styled.section`
         position: absolute;
         z-index: -1;
     }
-    /* height: 730px; */
 `
 const PhotoBox= styled.div`
     background-color: ${props => props.theme.primary};
@@ -166,29 +171,105 @@ const SocialStyled = styled.ul`
 `
 
 const Header = () => {
+
+    const cursorHandlers = useCursorHandlers();
+
+    const [tl, setTimeline] = useState();
+    const [reveal, setReveal] = useState(false);
+    const [social, setSocial] = useState([]);
+
+    const title = useRef(null);
+    const header = useRef(null);
+    const prof = useRef(null);
+    const welcome = useRef(null);
+    const socialRef = useRef(null);
+    const box = useRef(null);
+
+    const onScreen = useOnScreen(header);
+
+    useEffect(() => {
+        const timeline = gsap.timeline({ defaults: {ease: "power4.out"} });
+        setTimeline(timeline);
+        timeline.set(welcome.current, { y: -60, opacity: 0 });
+        timeline.set(prof.current, { y: -60, opacity: 0 });
+        timeline.set(box.current, { height: "0%", opacity: 0 });
+        timeline.set(box.current.children[0], { opacity: 0 });
+        timeline.set(box.current.children[1], { opacity: 0 });
+
+        setSocial([socialRef.current.children[0], socialRef.current.children[1], socialRef.current.children[2]]);
+        timeline.set(socialRef.current.children[0], { y: -60, opacity: 0 });
+        timeline.set(socialRef.current.children[1], { y: -60, opacity: 0 });
+        timeline.set(socialRef.current.children[2], { y: -60, opacity: 0 });
+    }, [])
+
+    useEffect(() => {
+        if (onScreen) setReveal(onScreen);
+    }, [onScreen]);
+
+    useEffect(() => {
+        if (reveal) {
+            tl.to(box.current, {
+                duration: 0.9,
+                height: "100%",
+                opacity: 1,
+                ease: "power2"
+            }).to(box.current.children[0], {
+                duration: 1,
+                opacity: 1,
+                ease: "power2"
+            }).to(box.current.children[1], {
+                duration: 1,
+                opacity: 1,
+                ease: "power2"
+            });
+            tl.to(welcome.current, {
+                duration: 1,
+                y: 0,
+                opacity: 1,
+                delay: -2,
+                ease: "power2"
+            }).to(prof.current, {
+                duration: 1,
+                y: 0,
+                opacity: 1,
+                delay: -1.5,
+                ease: "power2"
+            }).to(social, {
+                duration: 1,
+                y: 0,
+                opacity: 1,
+                delay: -1,
+                stagger: 0.1,
+                ease: "power2"
+            });
+        }
+    }, [tl, reveal])
+
     return(
         <>
-            <HeaderStyled>
-                <TextStyled>
-                    Hi there. <br/>
-                    I am Hubert
-                    <ProfStyled>
+            <HeaderStyled ref={header}>
+                <TextStyled ref={title}>
+                    <div id="header-welcome" ref={welcome}>
+                        Hi there. <br/>
+                        I am Hubert
+                    </div>
+                    <ProfStyled ref={prof}>
                         ui designer <br />
                         & frontend dev
                     </ProfStyled>
-                    <SocialStyled>
-                        <li><a href="https://www.dribbble.com/hubkruczek">
+                    <SocialStyled ref={socialRef}>
+                        <li {...cursorHandlers}><a href="https://www.dribbble.com/hubkruczek">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
                             <path d="M15,7H3.41l5.3-5.29A1,1,0,0,0,7.29.29l-7,7a1,1,0,0,0-.21.33.92.92,0,0,0,0,.76,1,1,0,0,0,.21.33l7,7A1,1,0,0,0,8,16a1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.42L3.41,9H15a1,1,0,0,0,0-2Z"/>
                         </svg>
                             Dribbble</a></li>
-                        <li><a href="https://www.behance.com/hubkruczek">
+                        <li {...cursorHandlers}><a href="https://www.behance.com/hubkruczek">
                         
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
                             <path d="M15,7H3.41l5.3-5.29A1,1,0,0,0,7.29.29l-7,7a1,1,0,0,0-.21.33.92.92,0,0,0,0,.76,1,1,0,0,0,.21.33l7,7A1,1,0,0,0,8,16a1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.42L3.41,9H15a1,1,0,0,0,0-2Z"/>
                         </svg>
                             Behance</a></li>
-                        <li><a href="https://www.linkedin.com/in/hubert-kruk/">
+                        <li {...cursorHandlers}><a href="https://www.linkedin.com/in/hubert-kruk/">
                             
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
                             <path d="M15,7H3.41l5.3-5.29A1,1,0,0,0,7.29.29l-7,7a1,1,0,0,0-.21.33.92.92,0,0,0,0,.76,1,1,0,0,0,.21.33l7,7A1,1,0,0,0,8,16a1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.42L3.41,9H15a1,1,0,0,0,0-2Z"/>
@@ -197,7 +278,7 @@ const Header = () => {
                     </SocialStyled>
                 </TextStyled>
                 <PhotoStyled>
-                    <PhotoBox>
+                    <PhotoBox ref={box}>
                         <img src={Photo} className="photo" alt="Photo of myself" />
                         <img src={Line} className="line" alt="Decorate" />
                     </PhotoBox>

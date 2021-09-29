@@ -3,10 +3,13 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import AnimationContextProvider from 'providers/AnimationContext';
 
 ReactDOM.render(
   <React.StrictMode>
+    <AnimationContextProvider>
       <App />
+    </AnimationContextProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

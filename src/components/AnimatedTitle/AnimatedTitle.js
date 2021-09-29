@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { gsap } from 'gsap';
+import PropTypes from 'prop-types';
 
 const TitleBox = styled.div`
     display: block;
@@ -83,3 +84,7 @@ const AnimateTitle = (props) => {
 }
 
 export default AnimateTitle;
+
+AnimateTitle.propTypes = {
+    title: PropTypes.string.isRequired
+};

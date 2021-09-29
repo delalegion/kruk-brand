@@ -1,11 +1,8 @@
 import styled from 'styled-components';
 
 import Project1 from "../../assets/projects/1.png";
-import Project2 from "../../assets/projects/2.png";
-import Project3 from "../../assets/projects/3.png";
-import Project4 from "../../assets/projects/4.png";
-import Project5 from "../../assets/projects/5.png";
-import Project6 from "../../assets/projects/6.png";
+
+import useCursorHandlers from "hooks/useCursorHandlers";
 
 const ItemPicture = styled.picture`
     display: block;
@@ -75,10 +72,11 @@ const ItemText = styled.h2`
     }
     @media (max-width: 768px) {
         font-size: 3.146vw;
+        margin-top: 8px;
     }
     @media (max-width: 500px) {
-        font-size: 4.546vw;  
-        margin-bottom: 10px;
+        font-size: 3.546vw;  
+        margin-bottom: 5px;
     }
 `
 const ItemClient = styled.p`
@@ -94,7 +92,7 @@ const ItemClient = styled.p`
         font-size: 2.990vw;
     }
     @media (max-width: 500px) {
-        font-size: 3.990vw;
+        font-size: 2.990vw;
     }
 `
 const GridNormal = styled.div`
@@ -104,17 +102,11 @@ const GridNormal = styled.div`
     grid-auto-rows: 1fr;
     margin-top: 50px;
 
-    @media (max-width: 768px) {
-        ${ItemText} {
-            font-size: 3vw;
-        }
-    }
-
     @media (min-width: 1920px) {
         font-size: 70px;
     }
     @media (max-width: 769px) {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(1, 1fr);
         margin-top: 0;
         grid-gap: 0;
         grid-column-gap: 2vw;
@@ -134,12 +126,15 @@ const Title = styled.h1`
 `
 
 const Works = () => {
+
+    const cursorHandlers = useCursorHandlers();
+
     return(
         <>
         <WorksStyled>
             <Title>Recent works</Title>
             <GridNormal>
-                <Project>
+                <Project {...cursorHandlers}>
                         <ItemFigure>
                             <ItemPicture>
                                 <img src={Project1} alt="" />
@@ -152,7 +147,7 @@ const Works = () => {
                             Konfederacja Kobiet RP
                         </ItemClient>
                 </Project>
-                <Project>
+                <Project {...cursorHandlers}>
                         <ItemFigure>
                             <ItemPicture>
                                 <img src={Project1} alt="" />
@@ -165,7 +160,7 @@ const Works = () => {
                             Konfederacja Kobiet RP
                         </ItemClient>
                 </Project>
-                <Project>
+                <Project {...cursorHandlers}>
                         <ItemFigure>
                             <ItemPicture>
                                 <img src={Project1} alt="" />

@@ -9,9 +9,11 @@ import Project6 from "../../assets/projects/6.png";
 
 import Container from "components/Container";
 import Coding from "./WorksCoding";
+import useCursorHandlers from "hooks/useCursorHandlers";
+
 
 const WorksStyled = styled.section`
-    margin: 11.806vw 6.25vw 3.806vw 6.25vw;
+    margin-top: 100px;
     scroll-behavior: smooth;
 
     @media (max-width: 768px) {
@@ -110,15 +112,16 @@ const GridNormal = styled.div`
         }
     }
 
-    & > ${Project} {
-        &:nth-child(2),
-        &:nth-child(5) {
-            transform: translateY(120px);
-        }
-    }
-
     @media (min-width: 1920px) {
         font-size: 70px;
+    }
+    @media (min-width: 1024px) {
+        & > ${Project} {
+            &:nth-child(2),
+            &:nth-child(5) {
+                transform: translateY(120px);
+            }
+        }
     }
     @media (max-width: 769px) {
         grid-template-columns: repeat(2, 1fr);
@@ -202,8 +205,26 @@ const ItemClient = styled.p`
         font-size: 2.990vw;
     }
 `
+const CustomMouse = styled.div`
+    width: 120px;
+    height: 120px;
+    padding: 20px;
+    background: ${props => props.theme.grey};
+    border-radius: 50%;
+    position: fixed;
+    pointer-events:none;
+    transform: translateX(-50%) translateY(-50%);
+
+    &.active {
+        visibility: visible;
+        opacity: 1;
+        cursor: progress;
+    }
+`
 
 const Works = () => {
+
+    const cursorHandlers = useCursorHandlers();
 
     return(
         <>
@@ -211,7 +232,7 @@ const Works = () => {
                 <Container>
                 <GridA>
                     <Grid>
-                        <Project>
+                        <Project {...cursorHandlers}>
                             <ItemFigure>
                                 <ItemPicture>
                                     <img src={Project1} alt="" />
@@ -226,7 +247,7 @@ const Works = () => {
                             </ItemClient>
                         </Project>
                         {/* ----------------------------- */}
-                        <Project>
+                        <Project {...cursorHandlers}>
                             <ItemFigure>
                                 <ItemPicture>
                                     <img src={Project2} alt="" />
@@ -246,7 +267,7 @@ const Works = () => {
 
                 <GridB>
                     <Grid>
-                        <Project>
+                        <Project {...cursorHandlers}>
                             <ItemFigure>
                                 <ItemPicture>
                                     <img src={Project3} alt="" />
@@ -260,7 +281,7 @@ const Works = () => {
                             </ItemClient>
                         </Project>
                         {/* ----------------------------- */}
-                        <Project>
+                        <Project {...cursorHandlers}>
                             <ItemFigure>
                                 <ItemPicture>
                                     <img src={Project4} alt="" />
@@ -280,7 +301,7 @@ const Works = () => {
 
                 <GridC>
                     <Grid>
-                        <Project>
+                        <Project {...cursorHandlers}>
                             <ItemFigure>
                                 <ItemPicture>
                                     <img src={Project5} alt="" />
@@ -294,7 +315,7 @@ const Works = () => {
                             </ItemClient>
                         </Project>
                         {/* ----------------------------- */}
-                        <Project>
+                        <Project {...cursorHandlers}>
                             <ItemFigure>
                                 <ItemPicture>
                                     <img src={Project6} alt="" />
@@ -314,7 +335,7 @@ const Works = () => {
 
                 <GridD>
                     <Grid>
-                        <Project>
+                        <Project {...cursorHandlers}>
                             <ItemFigure>
                                 <ItemPicture>
                                     <img src={Project5} alt="" />
@@ -328,7 +349,7 @@ const Works = () => {
                             </ItemClient>
                         </Project>
                         {/* ----------------------------- */}
-                        <Project>
+                        <Project {...cursorHandlers}>
                             <ItemFigure>
                                 <ItemPicture>
                                     <img src={Project6} alt="" />
@@ -345,7 +366,7 @@ const Works = () => {
                 </GridD>
 
                 <GridNormal>
-                    <Project>
+                    <Project {...cursorHandlers}>
                             <ItemFigure>
                                 <ItemPicture>
                                     <img src={Project1} alt="" />
@@ -358,7 +379,7 @@ const Works = () => {
                                 Konfederacja Kobiet RP
                             </ItemClient>
                     </Project>
-                    <Project>
+                    <Project {...cursorHandlers}>
                             <ItemFigure>
                                 <ItemPicture>
                                     <img src={Project1} alt="" />
@@ -371,7 +392,7 @@ const Works = () => {
                                 Konfederacja Kobiet RP
                             </ItemClient>
                     </Project>
-                    <Project>
+                    <Project {...cursorHandlers}>
                             <ItemFigure>
                                 <ItemPicture>
                                     <img src={Project1} alt="" />
@@ -384,7 +405,7 @@ const Works = () => {
                                 Konfederacja Kobiet RP
                             </ItemClient>
                     </Project>
-                    <Project>
+                    <Project {...cursorHandlers}>
                             <ItemFigure>
                                 <ItemPicture>
                                     <img src={Project1} alt="" />
@@ -397,7 +418,7 @@ const Works = () => {
                                 Konfederacja Kobiet RP
                             </ItemClient>
                     </Project>
-                    <Project>
+                    <Project {...cursorHandlers}>
                             <ItemFigure>
                                 <ItemPicture>
                                     <img src={Project1} alt="" />
@@ -410,7 +431,7 @@ const Works = () => {
                                 Konfederacja Kobiet RP
                             </ItemClient>
                     </Project>
-                    <Project>
+                    <Project {...cursorHandlers}>
                             <ItemFigure>
                                 <ItemPicture>
                                     <img src={Project1} alt="" />

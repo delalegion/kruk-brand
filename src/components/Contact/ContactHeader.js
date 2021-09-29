@@ -3,6 +3,8 @@ import AnimateTitle from "components/AnimatedTitle/AnimatedTitle";
 import styled from 'styled-components';
 import { Link } from 'react-scroll';
 
+import useCursorHandlers from "hooks/useCursorHandlers";
+
 const Scroll = styled.div`
     display: flex;
     position: relative;
@@ -23,7 +25,7 @@ const ScrollButtonBox = styled.div`
     justify-content: center;
     align-items: center;
     position: relative;
-    top: -9.375vw;
+    top: -8.375vw;
     margin-right: 50px;
 
     @media (min-width: 1920px) {
@@ -86,11 +88,14 @@ const ScrollButton = styled(Link)`
 `
 
 const Header = () => {
+
+    const cursorHandlers = useCursorHandlers();
+
     return(
         <>
             <AnimateTitle title="Any questions? Feel free to ask! 🤩" />
             <Scroll>
-                    <ScrollButtonBox>
+                    <ScrollButtonBox {...cursorHandlers}>
                         <ScrollButton name="ScrollButton" to="contact" smooth={true} duration={500} offset={-50}>
                             <svg width="30" height="44" viewBox="0 0 30 44" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M16.9 2L16.9 0.35L13.6 0.35L13.6 2L16.9 2ZM13.6 2L13.6 40.5L16.9 40.5L16.9 2L13.6 2Z" fill="white"/>
