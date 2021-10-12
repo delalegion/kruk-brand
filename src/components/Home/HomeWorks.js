@@ -9,18 +9,19 @@ import Project6 from "../../assets/projects/6.png";
 
 import useCursorHandlers from "hooks/useCursorHandlers";
 
-import { Element } from 'react-scroll';
+import { useRef, useEffect } from "react";
+import gsap from "gsap";
 
 const Title = styled.h1`
     font-size: 6.250vw;
     font-family: ${props => props.theme.semiBold};
+    margin-top: 0px;
 
     @media (min-width: 1920px) {
         font-size: 120px;
     }
     @media (max-width: 768px) {
         font-size: 13vw;
-        margin-top: 0px;
     }
 `
 const WorksStyled = styled.section`
@@ -99,6 +100,15 @@ const ItemPicture = styled.picture`
         bottom: auto;
         transition: ${props => props.theme.animationSecond};
     }
+    & > img:nth-child(2) {
+        z-index: 2;
+        position: relative;
+    }
+    & > img:nth-child(3) {
+        position: absolute;
+        left: 0;
+        z-index: 1;
+    }
 `
 const ItemFigure = styled.figure`
     background: hsla(0,0%,100%,.05);
@@ -128,6 +138,9 @@ const GridItem = styled.div`
     &:hover ${ItemPicture} {
         & > img {
             transform: scale(1.1);
+        }
+        & > img:nth-child(2) {
+            opacity: 0;
         }
     }
 `
@@ -168,6 +181,7 @@ const MoreButton = styled.div`
     display: inline-flex;
     justify-content: center;
     align-items: center;
+    opacity: 0;
 
     &:hover {
         transition: ${props => props.theme.animationSecond};
@@ -196,21 +210,82 @@ const Button = styled.section`
         margin-bottom: 50px;
     }
 `
+const RedReveal = styled.div`
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 3;
+    background: ${props => props.theme.primary};
+`
 
 
 const Works = () => {
 
+    const title = useRef(null);
+    const roll = useRef(null);
+    const arrow = useRef(null);
+
     const cursorHandlers = useCursorHandlers();
+
+    const revealRefs = useRef([]);
+    revealRefs.current = [];
+ 
+    const addToRefs = el => {
+        if (el && !revealRefs.current.includes(el)) {
+            revealRefs.current.push(el);
+        }
+    };
+
+    useEffect(() => {
+        gsap.set(title.current, { y: -60, opacity: 0 });
+        gsap.to(title.current, {
+            duration: 0.7,
+            y: 0,
+            opacity: 1,
+            ease: "power2",
+            scrollTrigger: {
+                trigger: title.current,
+                start: 'top center+=200',
+                toggleActions: 'play none play none'
+            }
+        });
+        gsap.to(roll.current, {
+            duration: 0.7,
+            opacity: 1,
+            ease: "power2",
+            scrollTrigger: {
+                trigger: roll.current,
+                start: 'top center+=200',
+            }
+        });
+        revealRefs.current.forEach((el, index) => {
+            gsap.to(el, {
+                duration: 1,
+                ease: 'power2',
+                height: 0,
+                scrollTrigger: {
+                    id: `section-${index+1}`,
+                    trigger: el,
+                    stagger: 0.2,
+                    start: 'top center+=150',
+                }
+            });
+        });
+    }, []);
 
     return(
         <>
             <WorksStyled>
-                <Title>Selected works</Title>
+                <Title ref={title}>Selected works</Title>
                 <GridStyled>
                     <GridItem {...cursorHandlers}>
                         <ItemFigure>
                             <ItemPicture>
+                                <RedReveal ref={addToRefs} />
                                 <img src={Project1} alt="" />
+                                <img src={Project2} alt="" />
                             </ItemPicture>
                         </ItemFigure>
                         <ItemText>
@@ -223,7 +298,9 @@ const Works = () => {
                     <GridItem {...cursorHandlers}>
                         <ItemFigure>
                             <ItemPicture>
+                                <RedReveal ref={addToRefs} />
                                 <img src={Project2} alt="" />
+                                <img src={Project1} alt="" />
                             </ItemPicture>
                         </ItemFigure>
                         <ItemText>
@@ -236,7 +313,9 @@ const Works = () => {
                     <GridItem {...cursorHandlers}>
                         <ItemFigure>
                             <ItemPicture>
+                                <RedReveal ref={addToRefs} />
                                 <img src={Project3} alt="" />
+                                <img src={Project1} alt="" />
                             </ItemPicture>
                         </ItemFigure>
                         <ItemText>
@@ -249,7 +328,9 @@ const Works = () => {
                     <GridItem {...cursorHandlers}>
                         <ItemFigure>
                             <ItemPicture>
+                                <RedReveal ref={addToRefs} />
                                 <img src={Project4} alt="" />
+                                <img src={Project1} alt="" />
                             </ItemPicture>
                         </ItemFigure>
                         <ItemText>
@@ -262,7 +343,9 @@ const Works = () => {
                     <GridItem {...cursorHandlers}>
                         <ItemFigure>
                             <ItemPicture>
+                                <RedReveal ref={addToRefs} />
                                 <img src={Project5} alt="" />
+                                <img src={Project1} alt="" />
                             </ItemPicture>
                         </ItemFigure>
                         <ItemText>
@@ -275,7 +358,9 @@ const Works = () => {
                     <GridItem {...cursorHandlers}>
                         <ItemFigure>
                             <ItemPicture>
+                                <RedReveal ref={addToRefs} />
                                 <img src={Project6} alt="" />
+                                <img src={Project1} alt="" />
                             </ItemPicture>
                         </ItemFigure>
                         <ItemText>
@@ -287,9 +372,8 @@ const Works = () => {
                     </GridItem>
                 </GridStyled>
                     <Button>
-                        <Element to="navbar" smooth={true} duration={500} offset={50}>
                         <Link to="/works">
-                            <MoreButton {...cursorHandlers}>
+                            <MoreButton {...cursorHandlers} ref={roll}>
                                 <Roll viewBox="0 0 279 279" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M156.119 0.892578L159.932 1.39707L163.53 18.1918L160.309 17.7643L159.606 14.4523L152.959 13.5704L151.446 16.5858L148.332 16.1738L156.119 0.892578ZM159.084 11.6141L157.636 4.54343L157.456 4.52032L154.211 10.9632L159.084 11.6141Z" fill="black"/>
                                 <path d="M169.106 3.00391L172.078 3.74717L168.841 16.7947L175.169 18.3737L174.512 21.0194L165.212 18.7087L169.106 3.00391Z" fill="black"/>
@@ -338,7 +422,6 @@ const Works = () => {
                                 </RollArrow>
                             </MoreButton>
                         </Link>
-                        </Element>
                     </Button>
             </WorksStyled>
         </>

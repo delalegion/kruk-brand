@@ -9,6 +9,12 @@ import Container from 'components/Container';
 import Works from "components/Contact/ContactWorks";
 
 const Contact = () => {
+
+    window.onbeforeunload = function () {
+        console.log("contact")
+        window.scrollTo(0, 0);
+    }
+
     return(
         <>
             <Header />

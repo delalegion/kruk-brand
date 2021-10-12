@@ -12,7 +12,7 @@ const HeaderStyled = styled.header`
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    margin-top: 70px;
+    margin-top: 100px;
     position: relative;
 `
 const TextStyled = styled.section`
@@ -209,36 +209,38 @@ const Header = () => {
     useEffect(() => {
         if (reveal) {
             tl.to(box.current, {
-                duration: 0.9,
+                duration: 1,
                 height: "100%",
                 opacity: 1,
                 ease: "power2"
             }).to(box.current.children[0], {
-                duration: 1,
+                duration: 0.8,
                 opacity: 1,
+                delay: -0.1,
                 ease: "power2"
             }).to(box.current.children[1], {
-                duration: 1,
+                duration: 0.8,
+                delay: -0.5,
                 opacity: 1,
                 ease: "power2"
             });
             tl.to(welcome.current, {
-                duration: 1,
+                duration: 0.5,
                 y: 0,
                 opacity: 1,
                 delay: -2,
                 ease: "power2"
             }).to(prof.current, {
-                duration: 1,
+                duration: 0.5,
+                y: 0,
+                opacity: 1,
+                delay: -1.7,
+                ease: "power2"
+            }).to(social, {
+                duration: 0.5,
                 y: 0,
                 opacity: 1,
                 delay: -1.5,
-                ease: "power2"
-            }).to(social, {
-                duration: 1,
-                y: 0,
-                opacity: 1,
-                delay: -1,
                 stagger: 0.1,
                 ease: "power2"
             });

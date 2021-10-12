@@ -5,7 +5,6 @@ import { AnimationContext } from 'providers/AnimationContext';
 function useOnScreen(ref, threshold = 0.3) {
 
   const [animation] = useContext(AnimationContext);
-  // State and setter for storing whether element is visible
   const [isIntersecting, setIntersecting] = useState(false);
 
   useEffect(() => {

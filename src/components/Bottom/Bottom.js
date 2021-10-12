@@ -4,7 +4,7 @@ import circles from "../../assets/background_footer_circles.png";
 import PropTypes from 'prop-types';
 
 const BottomStyled = styled.section`
-    padding: 50px 0;
+    padding: 0 0 50px 0;
     position: relative;
     z-index: 10;
     background-image: url(${background});

@@ -3,6 +3,9 @@ import ImageFirst from "../../assets/what_2.svg";
 import ImageSecond from "../../assets/what_1.svg";
 import ImageThird from "../../assets/what_3.svg";
 
+import { useEffect, useRef } from 'react';
+import gsap from 'gsap/all';
+
 const Title = styled.h1`
     font-size: 6.250vw;
     font-family: ${props => props.theme.semiBold};
@@ -44,6 +47,7 @@ const GridStyled = styled.div`
 const GridItem = styled.div`
     display: flex;
     flex-direction: column;
+    position: relative;
 
     &:nth-child(2) {
         margin-top: 100px;
@@ -87,6 +91,7 @@ const GridItemBox = styled.div`
     background-color: #272727;
     justify-content: center;
     display: flex;
+    position: relative;
     /* height: 380px; */
 
     & > img {
@@ -98,15 +103,69 @@ const GridItemBox = styled.div`
         }
     }
 `
+const RedReveal = styled.div`
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 100%;
+    background: ${props => props.theme.primary};
+`
 
 const Offer = () => {
+
+    const title = useRef(null);
+    const section = useRef(null);
+
+    const revealRefs = useRef([]);
+    revealRefs.current = [];
+ 
+    const addToRefs = el => {
+        if (el && !revealRefs.current.includes(el)) {
+            revealRefs.current.push(el);
+        }
+    };
+
+    useEffect(() => {
+        gsap.set(title.current, { y: -70, opacity: 0 });
+        gsap.to(title.current, {
+            duration: 0.7,
+            y: 0,
+            opacity: 1,
+            ease: "power2",
+            scrollTrigger: {
+                trigger: title.current,
+                start: 'top center+=50',
+                toggleActions: 'restart none none none'
+            }
+        })
+        revealRefs.current.forEach((el, index) => {
+            gsap.set(el, { height: "100%" });
+            gsap.to(el, {
+                duration: 1,
+                ease: 'power2',
+                height: 0,
+                scrollTrigger: {
+                    id: `section-${index+1}`,
+                    trigger: el,
+                    stagger: 0.2,
+                    start: 'top center+=150',
+                    toggleActions: 'restart none none none'
+                }
+            });
+        });
+    }, []);
+
+
     return(
         <>
-            <OfferStyled>
-                <Title>What i do</Title>
+            <OfferStyled ref={section}>
+                <Title ref={title}>What i do</Title>
                 <GridStyled>
                     <GridItem>
                         <GridItemBox>
+                            <RedReveal ref={addToRefs} />
                             <img src={ImageThird} alt="" />
                         </GridItemBox>
                         <GridItemText>
@@ -115,6 +174,7 @@ const Offer = () => {
                     </GridItem>
                     <GridItem>
                         <GridItemBox>
+                            <RedReveal ref={addToRefs} />
                             <img src={ImageFirst} alt="" />
                         </GridItemBox>
                         <GridItemText>
@@ -123,6 +183,7 @@ const Offer = () => {
                     </GridItem>
                     <GridItem>
                         <GridItemBox>
+                            <RedReveal ref={addToRefs} />
                             <img src={ImageSecond} alt="" />
                         </GridItemBox>
                         <GridItemText>

@@ -25,6 +25,7 @@ import gsap from 'gsap/all';
 
 import LogoSygnet from 'assets/logoSygnet.svg';
 import LogoText from 'assets/logoText.svg';
+import useWindowSize from "hooks/useWindowSize";
 
 const LoadScreen = styled.div`
   position: fixed;
@@ -44,6 +45,10 @@ const LoadWord = styled.p`
   color: white;
   position: absolute;
   margin: 0;
+
+  @media (min-width: 1920px) {
+    font-size: 180px;
+  }
 `
 const LoadContainer = styled.div`
   display: flex;
@@ -101,6 +106,7 @@ const LogoStyled = styled.div`
 function App() {
 
   const [, setAnimation] = useContext(AnimationContext);
+  const window = useWindowSize();
 
   const screen = useRef(null);
   const screenRed = useRef(null);
@@ -118,56 +124,61 @@ function App() {
     setAnimation(false);
   }
 
+  const isMobile = (window.width > 1640) ? "-50px" : "-4vw";
+
   if (typeof window !== "undefined") {
-    gsap.registerPlugin(ScrollTrigger); 
+    gsap.registerPlugin(ScrollTrigger);
+    gsap.config({
+      nullTargetWarn: false
+    }) 
   }
 
   useEffect(() => {
 
       tl.set(screen.current, { height: "100%" });
       tl.set(screenRed.current, { height: "100%" });
-      tl.set(word.current, { top: 0, opacity: 0 });
-      tl.set(secondWord.current, { top: 0, opacity: 0 });
-      tl.set(logoContainer.current, { top: 0, opacity: 0 });
+      tl.set(word.current, { y: 100, opacity: 0 });
+      tl.set(secondWord.current, { y: 100, opacity: 0 });
+      tl.set(logoContainer.current, { y: 100, opacity: 0 });
       tl.set(logo.current, { left: 60 });
       tl.set(logoText.current, { right: 0, opacity: 0 });
 
       tl.to(word.current, {
         opacity: 1,
-        top: "auto",
-        duration: 1,
+        y: 0,
+        duration: 0.7,
       }).to(word.current, {
         opacity: 0,
-        top: -120,
-        duration: 1,
+        y: -100,
+        duration: 0.7,
         pointerEvents: "none",
       }).to(secondWord.current, {
         opacity: 1,
-        top: "auto",
-        duration: 1,
+        y: 0,
+        duration: 0.7,
       }).to(secondWord.current, {
         opacity: 0,
-        top: -120,
-        duration: 1,
+        y: -100,
+        duration: 0.7,
         pointerEvents: "none",
       }).to(logoContainer.current, {
         opacity: 1,
-        top: "auto",
-        duration: 1
+        y: 0,
+        duration: 0.7
       }).to(logo.current, {
         left: 0,
         duration: 1,
         delay: -0.5,
       }).to(logoText.current, {
-        right: "-4vw",
-        duration: 1,
+        right: isMobile,
+        duration: 0.7,
         opacity: 1,
         delay: -0.8
       }).to(logoContainer.current, {
         opacity: 0,
-        top: -120,
+        y: -100,
         duration: 1,
-        delay: 1,
+        delay: 0.5,
         pointerEvents: "none",
       }).to(screen.current, {
         height: "0%",
@@ -186,7 +197,6 @@ function App() {
       <Router>
         <CursorContextProvider>
           <Cursor />
-          <ScrollToTop />
           <ThemeProvider theme={theme}>
             <LoadScreen ref={screen}>
               <LoadContainer>
@@ -202,11 +212,13 @@ function App() {
               <Container> 
                 <Navbar />
               </Container>
-              <Switch>
-                  <Route exact path="/" component={HomePage} />
-                  <Route path="/works" component={WorkPage} />
-                  <Route path="/contact" component={ContactPage} />
-              </Switch>
+              <ScrollToTop>
+                <Switch>
+                    <Route exact path="/" component={HomePage} />
+                    <Route path="/works" component={WorkPage} />
+                    <Route path="/contact" component={ContactPage} />
+                </Switch>
+              </ScrollToTop>
           </ThemeProvider>
         </CursorContextProvider>
       </Router>

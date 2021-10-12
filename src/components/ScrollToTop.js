@@ -1,12 +1,15 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
-export default function ScrollToTop() {
+const ScrollToTop = (props) => {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    window.scrollTo({top: 0, behavior: 'smooth'});
+    console.log("zmiana")
+    window.scrollTo(0, 0);
   }, [pathname]);
 
-  return null;
-}
+  return <>{props.children}</>;
+};
+
+export default ScrollToTop;

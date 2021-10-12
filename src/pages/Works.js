@@ -7,6 +7,12 @@ import Header from "../components/Works/WorksHeader";
 import WorksSection from "../components/Works/Works";
 
 const Works = () => {
+
+    window.onbeforeunload = function () {
+        console.log("works")
+        window.scrollTo(0, 0);
+    }
+
     return(
         <>
             <Header />

@@ -7,6 +7,12 @@ import Header from '../components/Home/HomeHeader';
 import Container from '../components/Container';
 
 const Home = () => {
+
+    window.onbeforeunload = function () {
+        console.log("home")
+        window.scrollTo(0, 0);
+    }
+
     return(
         <>
             <Container>

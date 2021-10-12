@@ -120,6 +120,9 @@ const MenuMobileStyled = styled.div`
         }
     }
 `
+const LinkStyled = styled(Link)`
+    display: flex;
+`
 
 const Navbar = () => {
 
@@ -169,7 +172,7 @@ const Navbar = () => {
 
     return(
         <NavbarStyled name="navbar" ref={navbar}>
-            <Link to="/" className="link hover-this" {...cursorHandlers}><LogoStyled src={Logo} ref={logo} alt="My personal logo which present head of raven on red background and title Hubert Kruk" /></Link>
+            <LinkStyled to="/" className="link hover-this" {...cursorHandlers}><LogoStyled src={Logo} ref={logo} alt="My personal logo which present head of raven on red background and title Hubert Kruk" /></LinkStyled>
             <MenuStyled ref={menuRef}>
                 <li><Link to="/" className="link hover-this" {...cursorHandlers}>Home</Link></li>
                 <li><Link to="/works" className="link hover-this" {...cursorHandlers}>Works</Link></li>
