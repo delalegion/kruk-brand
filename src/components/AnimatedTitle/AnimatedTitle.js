@@ -1,14 +1,17 @@
-import { useEffect, useRef } from 'react';
-import styled from 'styled-components';
+import { useContext, useEffect, useRef } from 'react';
+import styled, { ThemeContext } from 'styled-components';
 import { gsap } from 'gsap';
+import { motion, useAnimation } from "framer-motion";
 import PropTypes from 'prop-types';
+import { IntersectionContext } from 'hooks/useIntersection';
 
-const TitleBox = styled.div`
+
+const TitleBox = styled(motion.div)`
     display: block;
     width: 100%;
     transition: transform 0.1s linear;
 `
-const Title = styled.h1`
+const Title = styled(motion.h1)`
     font-size: 6.250vw;
     display: inline-block;
     white-space: nowrap;
@@ -38,6 +41,8 @@ const AnimateTitle = (props) => {
 
     const moveRef = useRef();
     const titleRef = useRef();
+    const controls = useAnimation();
+    const theme = useContext(ThemeContext);
     
     const Mousedown = (event) => {
 
@@ -52,7 +57,8 @@ const AnimateTitle = (props) => {
         let y = x / width;
         if (window.innerWidth > rect) { y = 0; };
 
-        if (window.innerWidth > 768) { gsap.to(moveRef.current, { duration: 2, ease: "expo.out", x: -y }); }
+        if (window.innerWidth > 768) { controls.start({ x: -y, transition: { type: "spring", stiffness: 40 } }) }
+        // if (window.innerWidth > 768) { gsap.to(moveRef.current, { duration: 2, ease: "expo.out", x: -y }); }
     }
     
     const enableMovement = () => {
@@ -74,10 +80,34 @@ const AnimateTitle = (props) => {
         window.addEventListener("resize", setDefaultCoordinates, false)
     }, [])
 
+    const { inView } = useContext(IntersectionContext);
+    const variants = {
+        hidden: {
+          x: -200,
+          opacity: 0,
+          transition: {
+            duration: 1,
+            ease: theme.bezier
+          }
+        },
+        show: {
+          x: 0,
+          opacity: 1,
+          transition: {
+              duration: 1,
+              delay: 0.1,
+              ease: theme.bezier
+          }
+        }
+    };
+
     return(
         <>
-            <TitleBox ref={titleRef}>
-                <Title ref={moveRef}>{props.title}</Title>
+            <TitleBox ref={titleRef} initial="hidden"
+            animate={inView ? "show" : "hidden"}
+            variants={variants}>
+                <Title ref={moveRef}  
+                animate={controls}>{props.title}</Title>
             </TitleBox>
         </>
     )

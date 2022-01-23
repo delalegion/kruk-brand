@@ -210,6 +210,7 @@ img {
   .col_l_11 { width: 91.66667%; }
   .col_l_12 { width: 100%; }
 
+
       /** Offset's **/
       .col_l_1_offset  { margin-left: 8.33333%; }
       .col_l_2_offset  { margin-left: 16.66667%; }
@@ -261,4 +262,11 @@ img {
 span {
   display: inline-block;
   transition: transform 0.2s linear;
+}
+.logoMotion {
+  stroke: #E61E29;
+  stroke-width: 1;
+  stroke-linejoin: miter;
+  stroke-linecap: miter;
+  paint-order: fill;
 }

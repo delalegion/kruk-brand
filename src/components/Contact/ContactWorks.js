@@ -1,8 +1,11 @@
 import styled from 'styled-components';
 
 import Project1 from "../../assets/projects/1.png";
+import Project2 from "../../assets/projects/2.png";
 
 import useCursorHandlers from "hooks/useCursorHandlers";
+import Reveal from 'components/Reveal';
+import { IntersectionObserver } from 'hooks/useIntersection';
 
 const ItemPicture = styled.picture`
     display: block;
@@ -21,11 +24,11 @@ const ItemPicture = styled.picture`
         bottom: auto;
         transition: ${props => props.theme.animationSecond};
     }
-    & > img:nth-child(1) {
+    & > img:nth-child(2) {
         z-index: 2;
         position: relative;
     }
-    & > img:nth-child(2) {
+    & > img:nth-child(3) {
         position: absolute;
         left: 0;
         z-index: 1;
@@ -53,13 +56,14 @@ const Project = styled.article`
         & > img {
             transform: scale(1.1);
         }
-        & > img:nth-child(1) {
+        & > img:nth-child(2) {
             opacity: 0;
         }
     }
 `
 const WorksStyled = styled.section`
-    margin: 180px 0 100px 0;
+    margin: 100px 0;
+    padding: 50px 0;
 `
 const ItemText = styled.h2`
     font-size: 1.146vw;
@@ -102,6 +106,11 @@ const GridNormal = styled.div`
     grid-auto-rows: 1fr;
     margin-top: 50px;
 
+    @media (min-width: 768px) {
+        & > div:nth-child(2) {
+            transform: translateY(120px);
+        }
+    }
     @media (min-width: 1920px) {
         font-size: 70px;
     }
@@ -129,12 +138,53 @@ const Works = () => {
 
     const cursorHandlers = useCursorHandlers();
 
+    let works_Array = [
+        {
+            "image": Project1,
+            "image_hover": Project2,
+            "title": "I'm doing modern websites",
+            "client": "Konfederacja Kobiet RP"
+        },
+        {
+            "image": Project1,
+            "image_hover": Project2,
+            "title": "I'm doing modern websites",
+            "client": "Konfederacja Kobiet RP"
+        },
+        {
+            "image": Project1,
+            "image_hover": Project2,
+            "title": "I'm doing modern websites",
+            "client": "Konfederacja Kobiet RP"
+        },
+    ]
+
     return(
         <>
         <WorksStyled>
             <Title>Recent works</Title>
             <GridNormal>
-                <Project {...cursorHandlers}>
+            {works_Array.map((item, key) => (
+                <IntersectionObserver key={key}>
+                    <Project {...cursorHandlers}>
+                        <ItemFigure>
+                            <ItemPicture>
+                                <Reveal />
+                                <img src={item.image} alt="" />
+                                <img src={item.image_hover} alt="" />
+                            </ItemPicture>
+                        </ItemFigure>
+                        <ItemText>
+                            {item.title}
+                        </ItemText>
+                        <ItemClient>
+                            {item.client}
+                        </ItemClient>
+                    </Project>
+                </IntersectionObserver>
+            ))}
+
+                {/* <Project {...cursorHandlers}>
                         <ItemFigure>
                             <ItemPicture>
                                 <img src={Project1} alt="" />
@@ -159,20 +209,7 @@ const Works = () => {
                         <ItemClient>
                             Konfederacja Kobiet RP
                         </ItemClient>
-                </Project>
-                <Project {...cursorHandlers}>
-                        <ItemFigure>
-                            <ItemPicture>
-                                <img src={Project1} alt="" />
-                            </ItemPicture>
-                        </ItemFigure>
-                        <ItemText>
-                            Projekt strony internetowej oraz broszury dla kobiet wspięrających prawdziwą kobiecość
-                        </ItemText>
-                        <ItemClient>
-                            Konfederacja Kobiet RP
-                        </ItemClient>
-                </Project>
+                </Project> */}
             </GridNormal>
         </WorksStyled>
         </>

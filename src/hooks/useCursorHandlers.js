@@ -11,13 +11,13 @@ const useCursorHandlers = (options = {}) => {
     if (options.onMouseEnter) {
       options.onMouseEnter(event);
     }
-    toggleCursor();
+    setCursor({ active: true });
   });
   const onMouseLeave = useCallback(event => {
     if (options.onMouseLeave) {
       options.onMouseLeave(event);
     }
-    toggleCursor();
+    setCursor({ active: false });
   });
   return { onMouseEnter, onMouseLeave };
 };

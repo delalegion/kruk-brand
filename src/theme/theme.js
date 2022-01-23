@@ -11,6 +11,11 @@ const theme = {
     extraLight: "'Silka-ExtraLight', sans-serif",
     bold: "'Silka-Bold', sans-serif",
     black: "'Silka-Black', sans-serif",
+    bezier: [0.64, 0.2, 0, 1.05]
 }
 
 export default theme;
+
+
+//0.41, 0.17, 0.18, 1.06
+//1, 0.02, 0.8, 0.47

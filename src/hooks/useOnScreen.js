@@ -8,7 +8,7 @@ function useOnScreen(ref, threshold = 0.3) {
   const [isIntersecting, setIntersecting] = useState(false);
 
   useEffect(() => {
-    if (!animation) { 
+    // if (!animation) { 
       const observer = new IntersectionObserver(
         ([entry]) => {
           setIntersecting(entry?.isIntersecting ?? false);
@@ -27,7 +27,7 @@ function useOnScreen(ref, threshold = 0.3) {
           observer.unobserve(currentRef);
         }
       };
-  }
+  // }
   }, [ref, threshold, animation]);
 
   return isIntersecting;

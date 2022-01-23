@@ -4,30 +4,30 @@ import Header from "components/Contact/ContactHeader";
 
 import Bottom from 'components/Bottom/Bottom';
 import Footer from 'components/Bottom/Footer';
-import Skills from 'components/Bottom/Skills';
+import Skills from 'components/Bottom/Skills/Skills';
 import Container from 'components/Container';
 import Works from "components/Contact/ContactWorks";
+import PageTransition from "transitions/PageTransition";
+import ScrollToTop from "components/ScrollToTop";
 
 const Contact = () => {
-
-    window.onbeforeunload = function () {
-        console.log("contact")
-        window.scrollTo(0, 0);
-    }
-
     return(
         <>
-            <Header />
-            <Container>
-                <ContactSection />
-                <Works />
-            </Container>
-            <Bottom>
+        <ScrollToTop>
+            <PageTransition>
+                <Header />
                 <Container>
-                    <Skills />
-                    <Footer social />
+                    <ContactSection />
+                    <Works />
                 </Container>
-            </Bottom>
+                <Bottom>
+                    <Container>
+                        <Skills />
+                        <Footer social />
+                    </Container>
+                </Bottom>
+            </PageTransition>
+        </ScrollToTop>
         </>
     )
 }

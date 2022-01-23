@@ -8,17 +8,21 @@ import Project5 from "../../assets/projects/5.png";
 import Project6 from "../../assets/projects/6.png";
 
 import Container from "components/Container";
-import Coding from "./WorksCoding";
+import Coding from "./Coding/WorksCoding";
 import useCursorHandlers from "hooks/useCursorHandlers";
-
+import { IntersectionObserver } from "hooks/useIntersection";
+import Reveal from "components/Reveal";
 
 const WorksStyled = styled.section`
     margin-top: 100px;
+    margin-bottom: 100px;
+    padding: 50px 0;
     scroll-behavior: smooth;
 
     @media (max-width: 768px) {
         margin: 0;
-        margin-top: 50px;
+        margin-top: 80px;
+        margin-bottom: 80px;
     }
 `
 const Grid = styled.div`
@@ -94,7 +98,7 @@ const Project = styled.article`
         & > img {
             transform: scale(1.1);
         }
-        & > img:nth-child(1) {
+        & > img:nth-child(2) {
             opacity: 0;
         }
     }
@@ -116,7 +120,7 @@ const GridNormal = styled.div`
         font-size: 70px;
     }
     @media (min-width: 1024px) {
-        & > ${Project} {
+        & > div {
             &:nth-child(2),
             &:nth-child(5) {
                 transform: translateY(120px);
@@ -134,10 +138,10 @@ const GridA = styled.div`
     position: relative;
 
     @media (min-width: 769px) {
-        & > ${Grid} > ${Project}:nth-child(1) {
+        & > ${Grid} > div:nth-child(1) {
             grid-column: 2/7;
         }
-        & > ${Grid} > ${Project}:nth-child(2) {
+        & > ${Grid} > div:nth-child(2) {
             grid-column: 8/12;
         }
     }
@@ -146,10 +150,10 @@ const GridB = styled.div`
     position: relative;
 
     @media (min-width: 769px) {
-        & > ${Grid} > ${Project}:nth-child(1) {
+        & > ${Grid} > div:nth-child(1) {
         grid-column: 1/6;
         }
-        & > ${Grid} > ${Project}:nth-child(2) {
+        & > ${Grid} > div:nth-child(2) {
             grid-column: 7/11;
             margin-top: 50px;
         }
@@ -159,11 +163,11 @@ const GridC = styled.div`
     position: relative;
 
     @media (min-width: 769px) {
-        & > ${Grid} > ${Project}:nth-child(1) {
+        & > ${Grid} > div:nth-child(1) {
         grid-column: 3/7;
         margin-top: 30px;
         }
-        & > ${Grid} > ${Project}:nth-child(2) {
+        & > ${Grid} > div:nth-child(2) {
             grid-column: 10/13;
         }
     }
@@ -172,11 +176,11 @@ const GridD = styled.div`
     position: relative;
 
     @media (min-width: 769px) {
-        & > ${Grid} > ${Project}:nth-child(1) {
+        & > ${Grid} > div:nth-child(1) {
         grid-column: 1/5;
         margin-top: 50px;
         }
-        & > ${Grid} > ${Project}:nth-child(2) {
+        & > ${Grid} > div:nth-child(2) {
             grid-column: 7/12;
         }
     }
@@ -222,6 +226,91 @@ const CustomMouse = styled.div`
     }
 `
 
+const list = [
+    {
+        projects: [
+            {
+                name: "Projekt strony internetowej oraz broszury dla kobiet wspięrających prawdziwą kobiecość",
+                client: "Konfederacja Kobiet RP",
+                image: Project1,
+                hover: Project2,
+                link: ""
+            },
+            {
+                name: "Projekt strony internetowej oraz broszury dla kobiet wspięrających prawdziwą kobiecość",
+                client: "Konfederacja Kobiet RP",
+                image: Project1,
+                hover: Project2,
+                link: ""
+            },
+        ],
+    },
+    {
+        projects: [
+            {
+                name: "Projekt strony internetowej oraz broszury dla kobiet wspięrających prawdziwą kobiecość",
+                client: "Konfederacja Kobiet RP",
+                image: Project3,
+                hover: Project4,
+                link: ""
+            },
+            {
+                name: "Projekt strony internetowej oraz broszury dla kobiet wspięrających prawdziwą kobiecość",
+                client: "Konfederacja Kobiet RP",
+                image: Project1,
+                hover: Project4,
+                link: ""
+            },
+        ],
+    },
+    {
+        projects: [
+            {
+                name: "Projekt strony internetowej oraz broszury dla kobiet wspięrających prawdziwą kobiecość",
+                client: "Konfederacja Kobiet RP",
+                image: Project3,
+                hover: Project4,
+                link: ""
+            },
+            {
+                name: "Projekt strony internetowej oraz broszury dla kobiet wspięrających prawdziwą kobiecość",
+                client: "Konfederacja Kobiet RP",
+                image: Project1,
+                hover: Project4,
+                link: ""
+            },
+            {
+                name: "Projekt strony internetowej oraz broszury dla kobiet wspięrających prawdziwą kobiecość",
+                client: "Konfederacja Kobiet RP",
+                image: Project1,
+                hover: Project4,
+                link: ""
+            },
+            {
+                name: "Projekt strony internetowej oraz broszury dla kobiet wspięrających prawdziwą kobiecość",
+                client: "Konfederacja Kobiet RP",
+                image: Project1,
+                hover: Project4,
+                link: ""
+            },
+            {
+                name: "Projekt strony internetowej oraz broszury dla kobiet wspięrających prawdziwą kobiecość",
+                client: "Konfederacja Kobiet RP",
+                image: Project1,
+                hover: Project4,
+                link: ""
+            },
+            {
+                name: "Projekt strony internetowej oraz broszury dla kobiet wspięrających prawdziwą kobiecość",
+                client: "Konfederacja Kobiet RP",
+                image: Project1,
+                hover: Project4,
+                link: ""
+            },
+        ],
+    },
+]
+
 const Works = () => {
 
     const cursorHandlers = useCursorHandlers();
@@ -232,224 +321,140 @@ const Works = () => {
                 <Container>
                 <GridA>
                     <Grid>
-                        <Project {...cursorHandlers}>
-                            <ItemFigure>
-                                <ItemPicture>
-                                    <img src={Project1} alt="" />
-                                    <img src={Project4} alt="" />
-                                </ItemPicture>
-                            </ItemFigure>
-                            <ItemText>
-                                Projekt strony internetowej oraz broszury dla kobiet wspięrających prawdziwą kobiecość
-                            </ItemText>
-                            <ItemClient>
-                                Konfederacja Kobiet RP
-                            </ItemClient>
-                        </Project>
-                        {/* ----------------------------- */}
-                        <Project {...cursorHandlers}>
-                            <ItemFigure>
-                                <ItemPicture>
-                                    <img src={Project2} alt="" />
-                                </ItemPicture>
-                            </ItemFigure>
-                            <ItemText>
-                                Projekt strony internetowej oraz broszury dla kobiet wspięrających prawdziwą kobiecość
-                            </ItemText>
-                            <ItemClient>
-                                Konfederacja Kobiet RP
-                            </ItemClient>
-                        </Project>
+                        {list[0].projects.map((item, i) => { 
+                            return (
+                                <>
+                                    <IntersectionObserver>
+                                        <Project {...cursorHandlers}>
+                                            <ItemFigure>
+                                                <ItemPicture>
+                                                    <Reveal />
+                                                    <img src={item.image} alt="" />
+                                                    <img src={item.hover} alt="" />
+                                                </ItemPicture>
+                                            </ItemFigure>
+                                            <ItemText>
+                                                {item.name}
+                                            </ItemText>
+                                            <ItemClient>
+                                                {item.client}
+                                            </ItemClient>
+                                        </Project>
+                                    </IntersectionObserver>
+                                </>
+                            )
+                        })}
                     </Grid>
                 </GridA>
-
-                {/* ------------------------------------------- */}
-
                 <GridB>
                     <Grid>
-                        <Project {...cursorHandlers}>
-                            <ItemFigure>
-                                <ItemPicture>
-                                    <img src={Project3} alt="" />
-                                </ItemPicture>
-                            </ItemFigure>
-                            <ItemText>
-                                Projekt strony internetowej oraz broszury dla kobiet wspięrających prawdziwą kobiecość
-                            </ItemText>
-                            <ItemClient>
-                                Konfederacja Kobiet RP
-                            </ItemClient>
-                        </Project>
-                        {/* ----------------------------- */}
-                        <Project {...cursorHandlers}>
-                            <ItemFigure>
-                                <ItemPicture>
-                                    <img src={Project4} alt="" />
-                                </ItemPicture>
-                            </ItemFigure>
-                            <ItemText>
-                                Projekt strony internetowej oraz broszury dla kobiet wspięrających prawdziwą kobiecość
-                            </ItemText>
-                            <ItemClient>
-                                Konfederacja Kobiet RP
-                            </ItemClient>
-                        </Project>
+                        {list[1].projects.map((item, i) => { 
+                            return (
+                                <>
+                                    <IntersectionObserver>
+                                        <Project {...cursorHandlers}>
+                                            <ItemFigure>
+                                                <ItemPicture>
+                                                    <Reveal />
+                                                    <img src={item.image} alt="" />
+                                                    <img src={item.hover} alt="" />
+                                                </ItemPicture>
+                                            </ItemFigure>
+                                            <ItemText>
+                                                {item.name}
+                                            </ItemText>
+                                            <ItemClient>
+                                                {item.client}
+                                            </ItemClient>
+                                        </Project>
+                                    </IntersectionObserver>
+                                </>
+                            )
+                        })}
                     </Grid>
                 </GridB>
-
-                {/* ------------------------------------------- */}
-
                 <GridC>
                     <Grid>
-                        <Project {...cursorHandlers}>
-                            <ItemFigure>
-                                <ItemPicture>
-                                    <img src={Project5} alt="" />
-                                </ItemPicture>
-                            </ItemFigure>
-                            <ItemText>
-                                Projekt strony internetowej oraz broszury dla kobiet wspięrających prawdziwą kobiecość
-                            </ItemText>
-                            <ItemClient>
-                                Konfederacja Kobiet RP
-                            </ItemClient>
-                        </Project>
-                        {/* ----------------------------- */}
-                        <Project {...cursorHandlers}>
-                            <ItemFigure>
-                                <ItemPicture>
-                                    <img src={Project6} alt="" />
-                                </ItemPicture>
-                            </ItemFigure>
-                            <ItemText>
-                                Projekt strony internetowej oraz broszury dla kobiet wspięrających prawdziwą kobiecość
-                            </ItemText>
-                            <ItemClient>
-                                Konfederacja Kobiet RP
-                            </ItemClient>
-                        </Project>
+                        {list[0].projects.map((item, i) => { 
+                            return (
+                                <>
+                                    <IntersectionObserver>
+                                        <Project {...cursorHandlers}>
+                                            <ItemFigure>
+                                                <ItemPicture>
+                                                    <Reveal />
+                                                    <img src={item.image} alt="" />
+                                                    <img src={item.hover} alt="" />
+                                                </ItemPicture>
+                                            </ItemFigure>
+                                            <ItemText>
+                                                {item.name}
+                                            </ItemText>
+                                            <ItemClient>
+                                                {item.client}
+                                            </ItemClient>
+                                        </Project>
+                                    </IntersectionObserver>
+                                </>
+                            )
+                        })}
                     </Grid>
                 </GridC>
-
-                {/* ------------------------------------------- */}
-
                 <GridD>
                     <Grid>
-                        <Project {...cursorHandlers}>
-                            <ItemFigure>
-                                <ItemPicture>
-                                    <img src={Project5} alt="" />
-                                </ItemPicture>
-                            </ItemFigure>
-                            <ItemText>
-                                Projekt strony internetowej oraz broszury dla kobiet wspięrających prawdziwą kobiecość
-                            </ItemText>
-                            <ItemClient>
-                                Konfederacja Kobiet RP
-                            </ItemClient>
-                        </Project>
-                        {/* ----------------------------- */}
-                        <Project {...cursorHandlers}>
-                            <ItemFigure>
-                                <ItemPicture>
-                                    <img src={Project6} alt="" />
-                                </ItemPicture>
-                            </ItemFigure>
-                            <ItemText>
-                                Projekt strony internetowej oraz broszury dla kobiet wspięrających prawdziwą kobiecość
-                            </ItemText>
-                            <ItemClient>
-                                Konfederacja Kobiet RP
-                            </ItemClient>
-                        </Project>
+                        {list[0].projects.map((item, i) => { 
+                            return (
+                                <>
+                                    <IntersectionObserver>
+                                        <Project {...cursorHandlers}>
+                                            <ItemFigure>
+                                                <ItemPicture>
+                                                    <Reveal />
+                                                    <img src={item.image} alt="" />
+                                                    <img src={item.hover} alt="" />
+                                                </ItemPicture>
+                                            </ItemFigure>
+                                            <ItemText>
+                                                {item.name}
+                                            </ItemText>
+                                            <ItemClient>
+                                                {item.client}
+                                            </ItemClient>
+                                        </Project>
+                                    </IntersectionObserver>
+                                </>
+                            )
+                        })}
                     </Grid>
                 </GridD>
-
                 <GridNormal>
-                    <Project {...cursorHandlers}>
-                            <ItemFigure>
-                                <ItemPicture>
-                                    <img src={Project1} alt="" />
-                                </ItemPicture>
-                            </ItemFigure>
-                            <ItemText>
-                                Projekt strony internetowej oraz broszury dla kobiet wspięrających prawdziwą kobiecość
-                            </ItemText>
-                            <ItemClient>
-                                Konfederacja Kobiet RP
-                            </ItemClient>
-                    </Project>
-                    <Project {...cursorHandlers}>
-                            <ItemFigure>
-                                <ItemPicture>
-                                    <img src={Project1} alt="" />
-                                </ItemPicture>
-                            </ItemFigure>
-                            <ItemText>
-                                Projekt strony internetowej oraz broszury dla kobiet wspięrających prawdziwą kobiecość
-                            </ItemText>
-                            <ItemClient>
-                                Konfederacja Kobiet RP
-                            </ItemClient>
-                    </Project>
-                    <Project {...cursorHandlers}>
-                            <ItemFigure>
-                                <ItemPicture>
-                                    <img src={Project1} alt="" />
-                                </ItemPicture>
-                            </ItemFigure>
-                            <ItemText>
-                                Projekt strony internetowej oraz broszury dla kobiet wspięrających prawdziwą kobiecość
-                            </ItemText>
-                            <ItemClient>
-                                Konfederacja Kobiet RP
-                            </ItemClient>
-                    </Project>
-                    <Project {...cursorHandlers}>
-                            <ItemFigure>
-                                <ItemPicture>
-                                    <img src={Project1} alt="" />
-                                </ItemPicture>
-                            </ItemFigure>
-                            <ItemText>
-                                Projekt strony internetowej oraz broszury dla kobiet wspięrających prawdziwą kobiecość
-                            </ItemText>
-                            <ItemClient>
-                                Konfederacja Kobiet RP
-                            </ItemClient>
-                    </Project>
-                    <Project {...cursorHandlers}>
-                            <ItemFigure>
-                                <ItemPicture>
-                                    <img src={Project1} alt="" />
-                                </ItemPicture>
-                            </ItemFigure>
-                            <ItemText>
-                                Projekt strony internetowej oraz broszury dla kobiet wspięrających prawdziwą kobiecość
-                            </ItemText>
-                            <ItemClient>
-                                Konfederacja Kobiet RP
-                            </ItemClient>
-                    </Project>
-                    <Project {...cursorHandlers}>
-                            <ItemFigure>
-                                <ItemPicture>
-                                    <img src={Project1} alt="" />
-                                </ItemPicture>
-                            </ItemFigure>
-                            <ItemText>
-                                Projekt strony internetowej oraz broszury dla kobiet wspięrających prawdziwą kobiecość
-                            </ItemText>
-                            <ItemClient>
-                                Konfederacja Kobiet RP
-                            </ItemClient>
-                    </Project>
+                        {list[2].projects.map((item, i) => { 
+                            return (
+                                <>
+                                    <IntersectionObserver>
+                                        <Project {...cursorHandlers}>
+                                            <ItemFigure>
+                                                <ItemPicture>
+                                                    <Reveal />
+                                                    <img src={item.image} alt="" />
+                                                    <img src={item.hover} alt="" />
+                                                </ItemPicture>
+                                            </ItemFigure>
+                                            <ItemText>
+                                                {item.name}
+                                            </ItemText>
+                                            <ItemClient>
+                                                {item.client}
+                                            </ItemClient>
+                                        </Project>
+                                    </IntersectionObserver>
+                                </>
+                            )
+                        })}
                 </GridNormal>
-
-                <Coding />
-
                 </Container>
             </WorksStyled>
+            <Coding />
         </>
     )
 }
