@@ -1,7 +1,5 @@
 import ContactSection from "components/Contact/Contact";
-
-import Header from "components/Contact/ContactHeader";
-
+import Header from "components/Contact/Header/ContactHeader";
 import Bottom from 'components/Bottom/Bottom';
 import Footer from 'components/Bottom/Footer';
 import Skills from 'components/Bottom/Skills/Skills';

@@ -111,7 +111,7 @@ const ScrollButton = (props) => {
             initial="hidden"
             animate={inView ? "show" : "hidden"}
             variants={variants}>
-                <ScrollButtonStyled name="ScrollButton" to="works" smooth={true} duration={500} offset={-50}>
+                <ScrollButtonStyled name="ScrollButton" to={props.to} smooth={true} duration={500} offset={-50}>
                     <svg width="30" height="44" viewBox="0 0 30 44" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M16.9 2L16.9 0.35L13.6 0.35L13.6 2L16.9 2ZM13.6 2L13.6 40.5L16.9 40.5L16.9 2L13.6 2Z" fill="white"/>
                         <path d="M27 29L15 41L3 29" stroke="white" strokeWidth="3.3" strokeLinecap="square"/>

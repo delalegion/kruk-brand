@@ -1,17 +1,12 @@
 import styled from "styled-components";
-
-import Project1 from "../../assets/projects/1.png";
-import Project2 from "../../assets/projects/2.png";
-import Project3 from "../../assets/projects/3.png";
-import Project4 from "../../assets/projects/4.png";
-import Project5 from "../../assets/projects/5.png";
-import Project6 from "../../assets/projects/6.png";
-
 import Container from "components/Container";
 import Coding from "./Coding/WorksCoding";
 import useCursorHandlers from "hooks/useCursorHandlers";
 import { IntersectionObserver } from "hooks/useIntersection";
 import Reveal from "components/Reveal";
+import { motion } from "framer-motion";
+import { list } from "components/Data";
+import { Link } from "react-router-dom";
 
 const WorksStyled = styled.section`
     margin-top: 100px;
@@ -39,7 +34,7 @@ const Grid = styled.div`
         margin: 0;
     }
 `
-const ItemText = styled.h2`
+const ItemText = styled(motion.h2)`
     font-size: 1.146vw;
     font-family: ${props => props.theme.semiBold};
     margin-top: 15px;
@@ -57,7 +52,7 @@ const ItemText = styled.h2`
         margin-bottom: 5px;
     }
 `
-const ItemPicture = styled.picture`
+const ItemPicture = styled(motion.picture)`
     display: block;
     position: absolute;
     left: 0;
@@ -84,10 +79,14 @@ const ItemPicture = styled.picture`
         z-index: 1;
     }
 `
-const Project = styled.article`
+const Project = styled(motion.article)`
     display: flex;
     flex-direction: column;
 
+    a {
+        color: white;
+        text-decoration: none;
+    }
     @media (max-width: 768px) {
         margin-bottom: 4.883vw;
     }
@@ -209,107 +208,6 @@ const ItemClient = styled.p`
         font-size: 2.990vw;
     }
 `
-const CustomMouse = styled.div`
-    width: 120px;
-    height: 120px;
-    padding: 20px;
-    background: ${props => props.theme.grey};
-    border-radius: 50%;
-    position: fixed;
-    pointer-events:none;
-    transform: translateX(-50%) translateY(-50%);
-
-    &.active {
-        visibility: visible;
-        opacity: 1;
-        cursor: progress;
-    }
-`
-
-const list = [
-    {
-        projects: [
-            {
-                name: "Projekt strony internetowej oraz broszury dla kobiet wspięrających prawdziwą kobiecość",
-                client: "Konfederacja Kobiet RP",
-                image: Project1,
-                hover: Project2,
-                link: ""
-            },
-            {
-                name: "Projekt strony internetowej oraz broszury dla kobiet wspięrających prawdziwą kobiecość",
-                client: "Konfederacja Kobiet RP",
-                image: Project1,
-                hover: Project2,
-                link: ""
-            },
-        ],
-    },
-    {
-        projects: [
-            {
-                name: "Projekt strony internetowej oraz broszury dla kobiet wspięrających prawdziwą kobiecość",
-                client: "Konfederacja Kobiet RP",
-                image: Project3,
-                hover: Project4,
-                link: ""
-            },
-            {
-                name: "Projekt strony internetowej oraz broszury dla kobiet wspięrających prawdziwą kobiecość",
-                client: "Konfederacja Kobiet RP",
-                image: Project1,
-                hover: Project4,
-                link: ""
-            },
-        ],
-    },
-    {
-        projects: [
-            {
-                name: "Projekt strony internetowej oraz broszury dla kobiet wspięrających prawdziwą kobiecość",
-                client: "Konfederacja Kobiet RP",
-                image: Project3,
-                hover: Project4,
-                link: ""
-            },
-            {
-                name: "Projekt strony internetowej oraz broszury dla kobiet wspięrających prawdziwą kobiecość",
-                client: "Konfederacja Kobiet RP",
-                image: Project1,
-                hover: Project4,
-                link: ""
-            },
-            {
-                name: "Projekt strony internetowej oraz broszury dla kobiet wspięrających prawdziwą kobiecość",
-                client: "Konfederacja Kobiet RP",
-                image: Project1,
-                hover: Project4,
-                link: ""
-            },
-            {
-                name: "Projekt strony internetowej oraz broszury dla kobiet wspięrających prawdziwą kobiecość",
-                client: "Konfederacja Kobiet RP",
-                image: Project1,
-                hover: Project4,
-                link: ""
-            },
-            {
-                name: "Projekt strony internetowej oraz broszury dla kobiet wspięrających prawdziwą kobiecość",
-                client: "Konfederacja Kobiet RP",
-                image: Project1,
-                hover: Project4,
-                link: ""
-            },
-            {
-                name: "Projekt strony internetowej oraz broszury dla kobiet wspięrających prawdziwą kobiecość",
-                client: "Konfederacja Kobiet RP",
-                image: Project1,
-                hover: Project4,
-                link: ""
-            },
-        ],
-    },
-]
 
 const Works = () => {
 
@@ -321,24 +219,26 @@ const Works = () => {
                 <Container>
                 <GridA>
                     <Grid>
-                        {list[0].projects.map((item, i) => { 
+                        {list.slice(0, 2).map((item, i) => { 
                             return (
                                 <>
                                     <IntersectionObserver>
                                         <Project {...cursorHandlers}>
-                                            <ItemFigure>
-                                                <ItemPicture>
-                                                    <Reveal />
-                                                    <img src={item.image} alt="" />
-                                                    <img src={item.hover} alt="" />
-                                                </ItemPicture>
-                                            </ItemFigure>
-                                            <ItemText>
-                                                {item.name}
-                                            </ItemText>
-                                            <ItemClient>
-                                                {item.client}
-                                            </ItemClient>
+                                            <Link to={"works/" + item.url}>
+                                                <ItemFigure>
+                                                    <ItemPicture>
+                                                        <Reveal />
+                                                        <img src={item.image} alt="" />
+                                                        <img src={item.hover} alt="" />
+                                                    </ItemPicture>
+                                                </ItemFigure>
+                                                <ItemText>
+                                                    {item.name}
+                                                </ItemText>
+                                                <ItemClient>
+                                                    {item.client}
+                                                </ItemClient>
+                                            </Link>
                                         </Project>
                                     </IntersectionObserver>
                                 </>
@@ -348,7 +248,7 @@ const Works = () => {
                 </GridA>
                 <GridB>
                     <Grid>
-                        {list[1].projects.map((item, i) => { 
+                        {list.slice(2, 4).map((item, i) => { 
                             return (
                                 <>
                                     <IntersectionObserver>
@@ -375,7 +275,7 @@ const Works = () => {
                 </GridB>
                 <GridC>
                     <Grid>
-                        {list[0].projects.map((item, i) => { 
+                        {list.slice(4, 6).map((item, i) => { 
                             return (
                                 <>
                                     <IntersectionObserver>
@@ -402,7 +302,7 @@ const Works = () => {
                 </GridC>
                 <GridD>
                     <Grid>
-                        {list[0].projects.map((item, i) => { 
+                        {list.slice(6, 8).map((item, i) => { 
                             return (
                                 <>
                                     <IntersectionObserver>
@@ -428,7 +328,7 @@ const Works = () => {
                     </Grid>
                 </GridD>
                 <GridNormal>
-                        {list[2].projects.map((item, i) => { 
+                        {list.slice(8, 15).map((item, i) => { 
                             return (
                                 <>
                                     <IntersectionObserver>
@@ -454,6 +354,7 @@ const Works = () => {
                 </GridNormal>
                 </Container>
             </WorksStyled>
+            
             <Coding />
         </>
     )

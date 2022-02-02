@@ -2,10 +2,9 @@ import styled from 'styled-components';
 import useCursorHandlers from "hooks/useCursorHandlers";
 import Reveal from 'components/Reveal';
 import { IntersectionObserver } from 'hooks/useIntersection';
-import Title from 'components/Title';
 import { list } from "components/Data";
-import { useEffect } from 'react/cjs/react.development';
-import { useState } from 'react';
+import Title from 'components/Title';
+import { useState, useEffect } from 'react';
 
 const ItemPicture = styled.picture`
     display: block;
@@ -125,6 +124,7 @@ const GridNormal = styled.div`
 const Works = () => {
 
     const cursorHandlers = useCursorHandlers();
+
     const [random, setRandom] = useState([]);
 
     useEffect(() => {
@@ -139,7 +139,7 @@ const Works = () => {
         <>
         <WorksStyled>
             <IntersectionObserver>
-                <Title>Recent works</Title>
+                <Title>More projects</Title>
             </IntersectionObserver>
             <GridNormal>
             {list.slice(random[0], random[1]).map((item, key) => (

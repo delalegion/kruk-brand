@@ -8,6 +8,7 @@ import {
 import WorkPage from './pages/Works';
 import ContactPage from './pages/Contact';
 import HomePage from './pages/Home';
+import ProjectPage from './pages/Project';
 
 import './App.scss';
 import styled, { ThemeContext, ThemeProvider } from 'styled-components';
@@ -24,8 +25,7 @@ import { useEffect, useRef, useContext } from 'react';
 import useWindowSize from "hooks/useWindowSize";
 import { AnimatePresence, AnimateSharedLayout, motion, useAnimation } from "framer-motion";
 import { Canvas, useFrame } from '@react-three/fiber';
-import { OrbitControls, SpotLight } from "@react-three/drei";
-import Sphere from "sphere";
+
 
 const LoadScreen = styled(motion.div)`
  position: fixed;
@@ -251,19 +251,17 @@ function App() {
             <LoadRed variants={backgroundRedMotion} initial="visible" animate={imageControl} onAnimationComplete={() => {
                 setAnimationState();
             }}/>
-              <Container> 
-                <Navbar />
-              </Container>
-          
+            <Container> 
+              <Navbar />
+            </Container>
                 <AnimatePresence exitBeforeEnter>
                   <Switch location={location} key={location.pathname}>
                       <Route exact path="/" component={HomePage} />
-                      <Route path="/works" component={WorkPage} />
-                    
+                      <Route exact path="/works" component={WorkPage} />
+                      <Route path="/works/:project" component={ProjectPage} />
                       <Route path="/contact" component={ContactPage} />
                   </Switch>
                 </AnimatePresence>
-
           </ThemeProvider>
         </CursorContextProvider>
     </>

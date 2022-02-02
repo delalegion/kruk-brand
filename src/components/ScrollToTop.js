@@ -1,24 +1,24 @@
 import { AnimationContext } from "providers/AnimationContext";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 
 const ScrollToTop = (props) => {
   const { pathname } = useLocation();
-
   const [, , runAnimation,setRunAnimation] = useContext(AnimationContext);
 
   useEffect(() => {
+    setRunAnimation(true);
+  })
+  useEffect(() => {
+    setRunAnimation(false);
     window.onbeforeunload = function() {
       window.scrollTo(0, 0);
     };
     window.scrollTo(0, 0);
-    if (window.scrollY === 0) { 
-      setRunAnimation(true); 
-    }
       if (!runAnimation) {
         window.addEventListener("scroll", function() {
-          if (window.scrollY === 0) { 
+          if (window.scrollY === 0) {
             setRunAnimation(true); 
           }
         })

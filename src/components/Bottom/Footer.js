@@ -32,6 +32,7 @@ const Footer = ({ social }) => {
 
     return(
         <>
+        {/* <Sphere /> */}
             <FooterStyled>
                 {!social ? (
                     <div className="row">

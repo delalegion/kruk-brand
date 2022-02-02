@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import AnimatedTitle from 'components/AnimatedTitle/AnimatedTitle';
 import { IntersectionObserver } from 'hooks/useIntersection';
-import ScrollText from './ScrollText';
-import ScrollButton from './ScrollButton';
+import ScrollText from 'components/ScrollText';
+import ScrollButton from 'components/ScrollButton';
 
 const Scroll = styled.div`
     display: flex;
@@ -29,7 +29,7 @@ const Header = () => {
             </IntersectionObserver>
             <Scroll>
             <IntersectionObserver>
-                <ScrollButton />
+                <ScrollButton to="works" />
             </IntersectionObserver>
             <Intersection>
                 <IntersectionObserver>

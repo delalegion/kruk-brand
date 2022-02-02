@@ -1,9 +1,8 @@
 import AnimateTitle from "components/AnimatedTitle/AnimatedTitle";
 
 import styled from 'styled-components';
-import { Link } from 'react-scroll';
-import ScrollButton from "components/Contact/ScrollButton";
 import { IntersectionObserver } from "hooks/useIntersection";
+import ScrollButton from "components/ScrollButton";
 
 const Scroll = styled.div`
     display: flex;
@@ -27,7 +26,7 @@ const Header = () => {
             </IntersectionObserver>
             <Scroll>
                 <IntersectionObserver>
-                    <ScrollButton />
+                    <ScrollButton to="contact" />
                 </IntersectionObserver>
             </Scroll>
         </>

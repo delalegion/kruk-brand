@@ -1,18 +1,10 @@
-import { Link } from "react-router-dom";
-import styled, { keyframes } from "styled-components";
-import Project1 from "assets/projects/1.png";
-import Project2 from "assets/projects/2.png";
-import Project3 from "assets/projects/3.png";
-import Project4 from "assets/projects/4.png";
-import Project5 from "assets/projects/5.png";
-import Project6 from "assets/projects/6.png";
-
+import styled from "styled-components";
 import useCursorHandlers from "hooks/useCursorHandlers";
-
 import Reveal from "components/Reveal";
 import Title from "components/Title";
 import { IntersectionObserver } from "hooks/useIntersection";
 import ButtonToWorks from "./ButtonToWorks";
+import { list } from "components/Data";
 
 const WorksStyled = styled.section`
     padding: 50px 0;
@@ -147,45 +139,6 @@ const Works = () => {
 
     const cursorHandlers = useCursorHandlers();
 
-    let works_Array = [
-        {
-            "image": Project1,
-            "image_hover": Project2,
-            "title": "I'm doing modern websites",
-            "client": "Konfederacja Kobiet RP"
-        },
-        {
-            "image": Project1,
-            "image_hover": Project2,
-            "title": "I'm doing modern websites",
-            "client": "Konfederacja Kobiet RP"
-        },
-        {
-            "image": Project1,
-            "image_hover": Project2,
-            "title": "I'm doing modern websites",
-            "client": "Konfederacja Kobiet RP"
-        },
-        {
-            "image": Project1,
-            "image_hover": Project2,
-            "title": "I'm doing modern websites",
-            "client": "Konfederacja Kobiet RP"
-        },
-        {
-            "image": Project1,
-            "image_hover": Project2,
-            "title": "I'm doing modern websites",
-            "client": "Konfederacja Kobiet RP"
-        },
-        {
-            "image": Project1,
-            "image_hover": Project2,
-            "title": "I'm doing modern websites",
-            "client": "Konfederacja Kobiet RP"
-        },
-    ]
-
     return(
         <>
             <WorksStyled>
@@ -193,18 +146,18 @@ const Works = () => {
                     <Title>Selected works</Title>
                 </IntersectionObserver>
                 <GridStyled>
-                {works_Array.map((item, key) => (
+                {list.slice(0, 6).map((item, key) => (
                     <IntersectionObserver key={key}>
                         <GridItem {...cursorHandlers}>
                             <ItemFigure>
                                 <ItemPicture>
                                     <Reveal />
                                     <img src={item.image} alt="" />
-                                    <img src={item.image_hover} alt="" />
+                                    <img src={item.hover} alt="" />
                                 </ItemPicture>
                             </ItemFigure>
                             <ItemText>
-                                {item.title}
+                                {item.name}
                             </ItemText>
                             <ItemClient>
                                 {item.client}
